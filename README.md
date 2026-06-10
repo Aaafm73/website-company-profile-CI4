@@ -1,38 +1,52 @@
-# CodeIgniter 4 Application Starter
 
-## What is CodeIgniter?
+# Company Profile - Vegetarian Paradise
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Pengenalan Project
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Project ini adalah aplikasi website company profile berbasis CodeIgniter 4 yang dapat digunakan untuk menampilkan profil perusahaan, informasi produk, kontak, serta halaman utama dan tentang kami. Aplikasi ini cocok untuk landing page bisnis yang sederhana, cepat, dan mudah dikelola.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## Fitur Utama
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- Halaman beranda (home)
+- Halaman tentang kami (about)
+- Informasi perusahaan dan kontak
+- Produk unggulan yang ditampilkan dari database
+- Dapat dijalankan di lingkungan lokal dengan XAMPP atau Laragon
 
-## Installation & updates
+## Persyaratan Sistem
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- PHP 8.2 atau lebih tinggi
+- Composer
+- Apache dan MySQL
+- XAMPP atau Laragon
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+## Instalasi di Local (XAMPP)
 
-## Setup
+1. Install XAMPP lalu jalankan Apache dan MySQL.
+2. Letakkan project ini di C:\\xampp\\htdocs\\company-profile.
+3. Buka terminal dan jalankan: composer install
+4. Salin file env menjadi .env.
+5. Atur base URL di file .env menjadi http://localhost/company-profile/public/
+6. Buat database MySQL dan sesuaikan setting database di .env.
+7. Jalankan aplikasi dengan php spark serve atau buka http://localhost/company-profile/public/
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## Instalasi di Local (Laragon)
 
-## Important Change with index.php
+1. Install Laragon lalu jalankan Apache dan MySQL.
+2. Letakkan project ini di C:\\laragon\\www\\company-profile.
+3. Buka terminal Laragon dan jalankan: composer install
+4. Salin file env menjadi .env.
+5. Atur base URL di file .env menjadi http://company-profile.test/
+6. Buat database MySQL dan sesuaikan setting database di .env.
+7. Buka browser ke http://company-profile.test/
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Catatan Penting
 
+<<<<<<< HEAD
+- Pastikan nama database, username, dan password di file .env sudah sesuai.
+- Jika ada masalah pada folder writable, pastikan izin folder benar.
+- Untuk pengembangan lebih lanjut, Anda dapat menjalankan php spark routes atau php spark migrate.
+=======
 This means that you should configure your web server to "point" to your project's *public* folder, and
 not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
 framework are exposed.
@@ -67,3 +81,7 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - json (enabled by default - don't turn it off)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
 - [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+
+
+................................................................................................................................
+>>>>>>> d325e05c596babf45cfa55d6486fc1f14501c201
