@@ -39,3 +39,8 @@ Project ini adalah aplikasi website company profile berbasis CodeIgniter 4 yang 
 5. Atur base URL di file .env menjadi http://company-profile.test/
 6. Buat database MySQL dan sesuaikan setting database di .env.
 7. Buka browser ke http://company-profile.test/
+
+## Interface User/Admin
+
+- interface user tidak perlu melakukan login dan langsung bisa mengakses website secara penuh tanpa perlu membuat akun
+- interface admin perlu melakukan login dengan username "admin" dan password "admin123" dan mengakses /admin/login
