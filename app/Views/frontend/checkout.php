@@ -1,6 +1,8 @@
 <?php echo $this->include('frontend/layout/header'); ?>
 <?php echo $this->include('frontend/_defaults'); ?>
 
+<?php $total = $total ?? 0; ?>
+
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
@@ -100,6 +102,7 @@
                         </div>
                         <div class="card-body">
                             <form action="<?= site_url('checkout/process') ?>" method="POST">
+                                <?= csrf_field() ?>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nama Lengkap *</label>
                                     <input type="text" class="form-control" id="name" name="customer_name" required>
@@ -167,7 +170,7 @@
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: 'product_id=' + productId + '&quantity=' + quantity
+            body: 'product_id=' + encodeURIComponent(productId) + '&quantity=' + encodeURIComponent(quantity) + '&' + encodeURIComponent(window.csrfName) + '=' + encodeURIComponent(window.csrfHash)
         })
         .then(response => response.json())
         .then(data => {

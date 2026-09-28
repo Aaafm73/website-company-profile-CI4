@@ -1,6 +1,13 @@
 <?php echo $this->include('admin/layout/header'); ?>
 <?php echo $this->include('admin/_defaults'); ?>
 
+<?php
+$categories = $categories ?? [];
+$products = $products ?? [];
+$selected_category = $selected_category ?? '';
+$pager = $pager ?? null;
+?>
+
 <!-- Products List -->
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -16,8 +23,8 @@
                 <select name="category" class="form-select" style="max-width: 200px;">
                     <option value="">Semua Kategori</option>
                     <?php foreach ($categories as $cat): ?>
-                        <option value="<?= $cat ?>" <?= $selected_category === $cat ? 'selected' : '' ?>>
-                            <?= $cat ?>
+                        <option value="<?= $cat['id'] ?>" <?= (string) $selected_category === (string) $cat['id'] ? 'selected' : '' ?>>
+                            <?= esc($cat['name']) ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

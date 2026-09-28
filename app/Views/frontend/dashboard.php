@@ -14,12 +14,16 @@
     <!-- Dashboard Section -->
     <section class="container my-5">
         <div class="mb-4">
-            <form method="GET" action="<?= site_url('dashboard') ?>" class="row g-2">
-                <div class="col-md-8">
-                    <input type="text" name="order_number" class="form-control" placeholder="Masukkan Nomor Pesanan (contoh: ORD-20240101-0001)" value="<?= esc(service('request')->getGet('order_number')) ?>">
+            <form method="POST" action="<?= site_url('dashboard/track-order') ?>" class="row g-2">
+                <?= csrf_field() ?>
+                <div class="col-md-5">
+                    <input type="text" name="order_number" class="form-control" placeholder="Masukkan Nomor Pesanan (contoh: ORD-20240101-0001)" value="<?= esc(service('request')->getPost('order_number') ?? '') ?>" required>
                 </div>
-                <div class="col-md-4">
-                    <button class="btn btn-primary w-100"><i class="fas fa-search"></i> Cari dengan ID</button>
+                <div class="col-md-5">
+                    <input type="email" name="email" class="form-control" placeholder="Email saat pemesanan" required>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary w-100"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
         </div>
@@ -29,7 +33,7 @@
                 <h5 class="mb-0"><i class="fas fa-search"></i> Lacak Pesanan</h5>
             </div>
             <div class="card-body">
-                <p class="mb-3">Masukkan nomor pesanan pada pencarian di atas untuk melihat status terbaru yang diupdate oleh admin.</p>
+                <p class="mb-3">Masukkan nomor pesanan dan email yang digunakan saat memesan untuk melihat status terbaru.</p>
 
                 <?php if (isset($selectedOrder) && $selectedOrder): ?>
                     <?php
@@ -92,7 +96,7 @@
                             </tbody>
                         </table>
                     </div>
-                <?php elseif (service('request')->getGet('order_number')): ?>
+                <?php elseif (service('request')->getGet('order_id')): ?>
                     <div class="alert alert-warning" role="alert">
                         <i class="fas fa-exclamation-circle"></i> Pesanan dengan nomor tersebut tidak ditemukan.
                     </div>

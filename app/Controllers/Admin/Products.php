@@ -3,35 +3,35 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Admin\BaseAdminController;
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 
 class Products extends BaseAdminController
 {
     protected $productModel;
+    protected $categoryModel;
 
     public function __construct()
     {
         $this->productModel = new ProductModel();
+        $this->categoryModel = new CategoryModel();
     }
 
     public function index()
     {
-        $category = $this->request->getGet('category');
-        $query = $this->productModel;
-
-        if ($category) {
-            $query = $query->where('category', $category);
-        }
-
+        $categoryId = $this->request->getGet('category');
+        $query = $this->productModel->getProductsWithCategory(
+            $categoryId ? (int) $categoryId : null
+        );
         $products = $query->orderBy('created_at', 'DESC')->paginate(10);
-        $categories = array_unique(array_column($this->productModel->findAll(), 'category'));
+        $categories = $this->categoryModel->getOrderedCategories();
 
         $data = [
             'title' => 'Kelola Produk | Vegetarian Paradise',
             'products' => $products,
             'pager' => $this->productModel->pager,
             'categories' => $categories,
-            'selected_category' => $category,
+            'selected_category' => $categoryId,
         ];
 
         return view('admin/products/index', $data);
@@ -39,7 +39,7 @@ class Products extends BaseAdminController
 
     public function create()
     {
-        $categories = ['Protein', 'Sayuran', 'Makanan Jadi', 'Minuman', 'Dessert', 'Lainnya'];
+        $categories = $this->categoryModel->getOrderedCategories();
 
         $data = [
             'title' => 'Tambah Produk | Vegetarian Paradise',
@@ -55,7 +55,7 @@ class Products extends BaseAdminController
             'name' => 'required|string|max_length[255]',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'category' => 'required|string',
+            'category_id' => 'required|is_natural_no_zero|is_not_unique[categories.id]',
             'stock' => 'required|integer',
         ];
 
@@ -67,7 +67,7 @@ class Products extends BaseAdminController
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
             'price' => $this->request->getPost('price'),
-            'category' => $this->request->getPost('category'),
+            'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
         ];
 
@@ -86,13 +86,13 @@ class Products extends BaseAdminController
 
     public function edit($id)
     {
-        $product = $this->productModel->find($id);
+        $product = $this->productModel->getProductWithCategory((int) $id);
 
         if (!$product) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Produk tidak ditemukan');
         }
 
-        $categories = ['Protein', 'Sayuran', 'Makanan Jadi', 'Minuman', 'Dessert', 'Lainnya'];
+        $categories = $this->categoryModel->getOrderedCategories();
 
         $data = [
             'title' => 'Edit Produk | Vegetarian Paradise',
@@ -115,7 +115,7 @@ class Products extends BaseAdminController
             'name' => 'required|string|max_length[255]',
             'description' => 'required|string',
             'price' => 'required|numeric',
-            'category' => 'required|string',
+            'category_id' => 'required|is_natural_no_zero|is_not_unique[categories.id]',
             'stock' => 'required|integer',
         ];
 
@@ -127,7 +127,7 @@ class Products extends BaseAdminController
             'name' => $this->request->getPost('name'),
             'description' => $this->request->getPost('description'),
             'price' => $this->request->getPost('price'),
-            'category' => $this->request->getPost('category'),
+            'category_id' => $this->request->getPost('category_id'),
             'stock' => $this->request->getPost('stock'),
         ];
 

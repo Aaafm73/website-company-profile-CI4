@@ -147,6 +147,10 @@ class Checkout extends BaseController
 
         $orderId = $this->orderModel->insert($orderData);
 
+        $authorizedOrderIds = array_map('intval', session('authorized_order_ids') ?? []);
+        $authorizedOrderIds[] = (int) $orderId;
+        session()->set('authorized_order_ids', array_slice(array_values(array_unique($authorizedOrderIds)), -20));
+
         // Create order items
         foreach ($cart as $item) {
             $product = $this->productModel->find($item['product_id']);

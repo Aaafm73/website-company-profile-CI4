@@ -1,6 +1,12 @@
 <?php echo $this->include('frontend/layout/header'); ?>
 <?php echo $this->include('frontend/_defaults'); ?>
 
+<?php
+$categories = $categories ?? [];
+$products = $products ?? [];
+$selected_category = $selected_category ?? '';
+?>
+
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
@@ -26,8 +32,8 @@
                                 Semua Produk
                             </a>
                             <?php foreach ($categories as $cat): ?>
-                                <a href="/products?category=<?= urlencode($cat) ?>" class="list-group-item list-group-item-action <?= ($selected_category == $cat) ? 'active' : '' ?>" style="<?= ($selected_category == $cat) ? 'background-color: var(--primary-color); color: white;' : '' ?>">
-                                    <?= $cat ?>
+                                <a href="/products?category=<?= $cat['id'] ?>" class="list-group-item list-group-item-action <?= ((string) $selected_category === (string) $cat['id']) ? 'active' : '' ?>" style="<?= ((string) $selected_category === (string) $cat['id']) ? 'background-color: var(--primary-color); color: white;' : '' ?>">
+                                    <?= esc($cat['name']) ?>
                                 </a>
                             <?php endforeach; ?>
                         </div>

@@ -220,9 +220,12 @@
                 <i class="fas fa-cog"></i> Pengaturan
             </a>
             <hr style="border-color: rgba(255,255,255,0.2); margin: 20px 0;">
-            <a class="nav-link" href="/admin/logout">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+            <form action="<?= site_url('admin/logout') ?>" method="POST" class="px-3">
+                <?= csrf_field() ?>
+                <button type="submit" class="nav-link btn btn-link text-start text-decoration-none p-0">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
         </nav>
     </div>
 

@@ -8,13 +8,38 @@ class InitialSeeder extends Seeder
 {
     public function run()
     {
+        $adminPassword = (string) getenv('ADMIN_INITIAL_PASSWORD');
+        if (strlen($adminPassword) < 12) {
+            throw new \RuntimeException('Set ADMIN_INITIAL_PASSWORD to a unique password of at least 12 characters before seeding.');
+        }
+
+        $categoryNames = ['Protein', 'Sayuran', 'Makanan Jadi', 'Minuman', 'Dessert', 'Lainnya'];
+        $categoryIds = [];
+
+        foreach ($categoryNames as $name) {
+            $category = $this->db->table('categories')
+                ->where('name', $name)
+                ->get()
+                ->getRowArray();
+
+            if (!$category) {
+                $this->db->table('categories')->insert(['name' => $name]);
+                $category = $this->db->table('categories')
+                    ->where('name', $name)
+                    ->get()
+                    ->getRowArray();
+            }
+
+            $categoryIds[$name] = $category['id'];
+        }
+
         // Seed Products
         $products = [
             [
                 'name' => 'Tahu Organik Segar',
                 'description' => 'Tahu organik berkualitas premium yang dibuat dari kacang kedelai pilihan.',
                 'price' => 15000,
-                'category' => 'Protein',
+                'category_id' => $categoryIds['Protein'],
                 'stock' => 50,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -22,7 +47,7 @@ class InitialSeeder extends Seeder
                 'name' => 'Tempe Goreng',
                 'description' => 'Tempe goreng renyah dengan cita rasa tradisional yang nikmat.',
                 'price' => 12000,
-                'category' => 'Protein',
+                'category_id' => $categoryIds['Protein'],
                 'stock' => 60,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -30,7 +55,7 @@ class InitialSeeder extends Seeder
                 'name' => 'Sayuran Segar Organik',
                 'description' => 'Paket sayuran segar organik pilihan untuk keluarga Anda.',
                 'price' => 45000,
-                'category' => 'Sayuran',
+                'category_id' => $categoryIds['Sayuran'],
                 'stock' => 40,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -38,7 +63,7 @@ class InitialSeeder extends Seeder
                 'name' => 'Nasi Kuning Vegetarian',
                 'description' => 'Nasi kuning lezat dengan bumbu tradisional dan bahan-bahan pilihan.',
                 'price' => 25000,
-                'category' => 'Makanan Jadi',
+                'category_id' => $categoryIds['Makanan Jadi'],
                 'stock' => 30,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -46,7 +71,7 @@ class InitialSeeder extends Seeder
                 'name' => 'Jus Buah Segar',
                 'description' => 'Jus buah segar tanpa pengawet, dibuat fresh setiap hari.',
                 'price' => 18000,
-                'category' => 'Minuman',
+                'category_id' => $categoryIds['Minuman'],
                 'stock' => 70,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -54,7 +79,7 @@ class InitialSeeder extends Seeder
                 'name' => 'Salad Buah Premium',
                 'description' => 'Salad buah premium dengan dressing madu yang sehat dan lezat.',
                 'price' => 35000,
-                'category' => 'Sayuran',
+                'category_id' => $categoryIds['Sayuran'],
                 'stock' => 25,
                 'created_at' => date('Y-m-d H:i:s'),
             ],
@@ -66,9 +91,9 @@ class InitialSeeder extends Seeder
 
         // Seed Admin User
         $adminUser = [
-            'username' => 'admin',
-            'email' => 'admin@vegetarian.com',
-            'password' => password_hash('admin123', PASSWORD_DEFAULT),
+            'username' => getenv('ADMIN_INITIAL_USERNAME') ?: 'admin',
+            'email' => getenv('ADMIN_INITIAL_EMAIL') ?: 'admin@example.com',
+            'password' => password_hash($adminPassword, PASSWORD_DEFAULT),
             'full_name' => 'Administrator',
             'role' => 'admin',
             'is_active' => true,

@@ -1,6 +1,8 @@
 <?php echo $this->include('admin/layout/header'); ?>
 <?php echo $this->include('admin/_defaults'); ?>
 
+<?php $categories = $categories ?? []; ?>
+
 <!-- Product Form -->
 <div class="row">
     <div class="col-lg-8">
@@ -37,12 +39,12 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="category" class="form-label">Kategori *</label>
-                        <select class="form-select" id="category" name="category" required>
+                        <label for="category_id" class="form-label">Kategori *</label>
+                        <select class="form-select" id="category_id" name="category_id" required>
                             <option value="">Pilih Kategori</option>
                             <?php foreach ($categories as $cat): ?>
-                                <option value="<?= $cat ?>" <?= isset($product) && $product['category'] === $cat ? 'selected' : '' ?>>
-                                    <?= $cat ?>
+                                <option value="<?= $cat['id'] ?>" <?= isset($product) && (int) $product['category_id'] === (int) $cat['id'] ? 'selected' : '' ?>>
+                                    <?= esc($cat['name']) ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>

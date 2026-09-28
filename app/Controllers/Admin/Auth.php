@@ -17,7 +17,8 @@ class Auth extends BaseController
     public function login()
     {
         if (session('admin_user')) {
-            return redirect()->to('/admin/dashboard');
+            session()->remove('admin_user');
+            session()->regenerate(true);
         }
 
         $data = [
@@ -30,8 +31,8 @@ class Auth extends BaseController
     public function processLogin()
     {
         $rules = [
-            'username' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'required|string|max_length[100]',
+            'password' => 'required|string|max_length[255]',
         ];
 
         if (!$this->validate($rules)) {
@@ -50,15 +51,24 @@ class Auth extends BaseController
         // Update last login
         $this->adminUserModel->updateLastLogin($user['id']);
 
+        // Rotate the session ID after authentication to prevent session fixation.
+        session()->regenerate(true);
+
         // Set session
-        session()->set('admin_user', $user);
+        session()->set('admin_user', [
+            'id' => (int) $user['id'],
+            'username' => $user['username'],
+            'full_name' => $user['full_name'],
+            'role' => $user['role'],
+        ]);
 
         return redirect()->to(site_url('admin/dashboard'))->with('message', 'Selamat datang, ' . $user['full_name']);
     }
 
     public function logout()
     {
-        session()->destroy();
+        session()->remove('admin_user');
+        session()->regenerate(true);
         return redirect()->to(site_url('admin/login'))->with('message', 'Anda telah logout');
     }
 }

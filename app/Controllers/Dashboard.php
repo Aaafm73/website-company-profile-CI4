@@ -24,34 +24,17 @@ class Dashboard extends BaseController
 
     public function index()
     {
-        $orderId = $this->request->getGet('order_id');
-        $orderNumber = $this->request->getGet('order_number');
-        $customerEmail = $this->request->getGet('email');
-
-        $orders = [];
+        $orderId = (int) $this->request->getGet('order_id');
+        $authorizedOrderIds = array_map('intval', session('authorized_order_ids') ?? []);
         $selectedOrder = null;
 
-        if ($orderId) {
+        if ($orderId > 0 && in_array($orderId, $authorizedOrderIds, true)) {
             $selectedOrder = $this->orderModel->getOrderWithItems($orderId);
-            if ($selectedOrder) {
-                $orders[] = $selectedOrder;
-            }
-        } elseif ($orderNumber) {
-            $selectedOrder = $this->orderModel->where('order_number', $orderNumber)->first();
-            if ($selectedOrder) {
-                $selectedOrder['items'] = $this->orderItemModel->getItemsWithProductDetails($selectedOrder['id']);
-                $orders[] = $selectedOrder;
-            }
-        } elseif ($customerEmail) {
-            $orders = $this->orderModel->where('customer_email', $customerEmail)->orderBy('created_at', 'DESC')->findAll();
-            foreach ($orders as &$order) {
-                $order['items'] = $this->orderItemModel->getItemsWithProductDetails($order['id']);
-            }
         }
 
         $data = [
             'title' => 'Dashboard | Vegetarian Paradise',
-            'orders' => $orders,
+            'orders' => $selectedOrder ? [$selectedOrder] : [],
             'selectedOrder' => $selectedOrder,
             'company_name' => $this->settingModel->getSetting('company_name', 'Vegetarian Paradise'),
         ];
@@ -99,26 +82,26 @@ class Dashboard extends BaseController
 
     public function trackOrder()
     {
-        $email = $this->request->getPost('email');
-        $orderNumber = $this->request->getPost('order_number');
+        $email = trim((string) $this->request->getPost('email'));
+        $orderNumber = trim((string) $this->request->getPost('order_number'));
 
-        // Allow searching by order_number alone if email not provided.
-        if ($orderNumber && !$email) {
-            $order = $this->orderModel->where('order_number', $orderNumber)->first();
-        } else {
-            $order = $this->orderModel->where('customer_email', $email)->where('order_number', $orderNumber)->first();
+        if ($email === '' || $orderNumber === '') {
+            return redirect()->back()->with('error', 'Masukkan email dan nomor pesanan.');
         }
+
+        $order = $this->orderModel
+            ->where('customer_email', $email)
+            ->where('order_number', $orderNumber)
+            ->first();
 
         if (!$order) {
             return redirect()->back()->with('error', 'Pesanan tidak ditemukan');
         }
 
-        // Keep tracking on the dashboard page so status updates from admin are always shown there.
-        $query = '?order_number=' . urlencode($orderNumber);
-        if ($email) {
-            $query .= '&email=' . urlencode($email);
-        }
+        $authorizedOrderIds = array_map('intval', session('authorized_order_ids') ?? []);
+        $authorizedOrderIds[] = (int) $order['id'];
+        session()->set('authorized_order_ids', array_slice(array_values(array_unique($authorizedOrderIds)), -20));
 
-        return redirect()->to('/dashboard' . $query);
+        return redirect()->to('/dashboard?order_id=' . (int) $order['id']);
     }
 }

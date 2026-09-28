@@ -55,6 +55,7 @@
                     </div>
                     <div class="card-body">
                         <form action="/dashboard/send-contact" method="POST">
+                            <?= csrf_field() ?>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nama Lengkap *</label>
                                 <input type="text" class="form-control" id="name" name="name" required>

@@ -12,7 +12,7 @@ $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 // Frontend Routes
 $routes->get('/', 'Home::index');
@@ -24,26 +24,27 @@ $routes->get('/products/detail/(:num)', 'Products::detail/$1');
 
 // Checkout Routes
 $routes->get('/checkout', 'Checkout::index');
-$routes->post('/checkout/add-to-cart', 'Checkout::addToCart');
-$routes->post('/checkout/remove-from-cart', 'Checkout::removeFromCart');
-$routes->post('/checkout/update-cart', 'Checkout::updateCart');
-$routes->post('/checkout/process', 'Checkout::process');
+$routes->post('/checkout/add-to-cart', 'Checkout::addToCart', ['filter' => 'throttle:cart']);
+$routes->post('/checkout/remove-from-cart', 'Checkout::removeFromCart', ['filter' => 'throttle:cart']);
+$routes->post('/checkout/update-cart', 'Checkout::updateCart', ['filter' => 'throttle:cart']);
+$routes->post('/checkout/process', 'Checkout::process', ['filter' => 'throttle:checkout']);
 
 // Dashboard Routes
 $routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/dashboard/contact', 'Dashboard::contact');
-$routes->post('/dashboard/send-contact', 'Dashboard::sendContact');
-$routes->post('/dashboard/track-order', 'Dashboard::trackOrder');
+$routes->post('/dashboard/send-contact', 'Dashboard::sendContact', ['filter' => 'throttle:contact']);
+$routes->post('/dashboard/track-order', 'Dashboard::trackOrder', ['filter' => 'throttle:tracking']);
 
 // Admin Routes
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin'], function($routes) {
     // Auth
     $routes->get('login', 'Auth::login');
-    $routes->post('login', 'Auth::processLogin');
-    $routes->get('logout', 'Auth::logout');
+    $routes->post('login', 'Auth::processLogin', ['filter' => 'throttle:admin-login']);
 });
 
 $routes->group('admin', ['namespace' => 'App\Controllers\Admin', 'filter' => 'adminauth'], function($routes) {
+    $routes->post('logout', 'Auth::logout');
+
     // Dashboard
     $routes->get('dashboard', 'Dashboard::index');
 

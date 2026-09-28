@@ -68,6 +68,7 @@
 
                         <!-- Add to Cart Form -->
                         <form action="<?= site_url('checkout/add-to-cart') ?>" method="POST" class="mb-3">
+                            <?= csrf_field() ?>
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Jumlah:</label>
                                 <input type="hidden" name="product_id" value="<?= $product['id'] ?>">

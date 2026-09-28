@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'throttle'      => \App\Filters\RateLimit::class,
         'adminauth'     => \App\Filters\AdminAuth::class,
     ];
 
@@ -73,13 +74,14 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
+            'throttle:global',
             // 'honeypot',
-            // 'csrf',
+            'csrf',
             // 'invalidchars',
         ],
         'after' => [
             // 'honeypot',
-            // 'secureheaders',
+            'secureheaders',
         ],
     ];
 
