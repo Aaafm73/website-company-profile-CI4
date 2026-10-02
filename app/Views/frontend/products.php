@@ -10,7 +10,7 @@ $selected_category = $selected_category ?? '';
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-store"></i> Katalog Produk</h1>
             <p class="mt-2">Temukan produk vegetarian pilihan Anda</p>
@@ -22,17 +22,17 @@ $selected_category = $selected_category ?? '';
         <div class="row">
             <!-- Sidebar Filters -->
             <div class="col-md-3 mb-4">
-                <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="card card-elevated">
                     <div class="card-body">
                         <h5 class="card-title">
                             <i class="fas fa-filter"></i> Filter Kategori
                         </h5>
                         <div class="list-group list-group-flush">
-                            <a href="/products?category=semua" class="list-group-item list-group-item-action <?= ($selected_category == 'semua' || !$selected_category) ? 'active' : '' ?>" style="<?= ($selected_category == 'semua' || !$selected_category) ? 'background-color: var(--primary-color); color: white;' : '' ?>">
+                            <a href="/products?category=semua" class="list-group-item list-group-item-action category-filter <?= ($selected_category == 'semua' || !$selected_category) ? 'active' : '' ?>">
                                 Semua Produk
                             </a>
                             <?php foreach ($categories as $cat): ?>
-                                <a href="/products?category=<?= $cat['id'] ?>" class="list-group-item list-group-item-action <?= ((string) $selected_category === (string) $cat['id']) ? 'active' : '' ?>" style="<?= ((string) $selected_category === (string) $cat['id']) ? 'background-color: var(--primary-color); color: white;' : '' ?>">
+                                <a href="/products?category=<?= $cat['id'] ?>" class="list-group-item list-group-item-action category-filter <?= ((string) $selected_category === (string) $cat['id']) ? 'active' : '' ?>">
                                     <?= esc($cat['name']) ?>
                                 </a>
                             <?php endforeach; ?>
@@ -48,24 +48,24 @@ $selected_category = $selected_category ?? '';
                         <?php foreach ($products as $product): ?>
                             <div class="col-sm-6 col-lg-4 mb-4">
                                 <div class="card product-card">
-                                    <div class="card-img-top" style="background-color: var(--light-bg); display: flex; align-items: center; justify-content: center; position: relative;">
+                                    <div class="card-img-top image-placeholder image-placeholder--relative">
                                         <?php if ($product['image']): ?>
-                                            <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-height: 250px; object-fit: cover;">
+                                            <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid product-image">
                                         <?php else: ?>
-                                            <i class="fas fa-image fa-4x" style="color: #ccc;"></i>
+                                            <i class="fas fa-image fa-4x icon-placeholder"></i>
                                         <?php endif; ?>
-                                        <span class="badge bg-info" style="position: absolute; top: 10px; right: 10px;">
+                                        <span class="badge bg-info category-badge">
                                             <?= $product['category'] ?>
                                         </span>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $product['name'] ?></h5>
-                                        <p class="card-text text-muted" style="height: 60px; overflow: hidden; font-size: 14px;">
+                                        <p class="card-text text-muted product-description-clamp product-description-clamp--small">
                                             <?= substr($product['description'], 0, 80) ?>...
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <span class="product-price">Rp <?= number_format($product['price'], 0, ',', '.') ?></span>
-                                            <span class="product-stock" style="font-size: 12px;">
+                                            <span class="product-stock product-stock--small">
                                                 <?php if ($product['stock'] > 0): ?>
                                                     <span class="badge bg-success">Tersedia</span>
                                                 <?php else: ?>

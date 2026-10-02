@@ -11,13 +11,13 @@
     </div>
     <div class="col-md-3">
         <div class="stat-card">
-            <div class="number" style="color: #ffc107;"><?= $pendingOrders ?? 0 ?></div>
+            <div class="number admin-number-pending"><?= $pendingOrders ?? 0 ?></div>
             <div class="label">Pesanan Menunggu</div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="stat-card">
-            <div class="number" style="color: #dc3545;"><?= $newContacts ?? 0 ?></div>
+            <div class="number admin-number-contact"><?= $newContacts ?? 0 ?></div>
             <div class="label">Kontak Baru</div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-sm table-hover">
-                        <thead style="background-color: var(--light-bg);">
+                        <thead class="table-head-light">
                             <tr>
                                 <th>No. Pesanan</th>
                                 <th>Pelanggan</th>
@@ -94,16 +94,16 @@
             </div>
             <div class="card-body">
                 <?php if (!empty($recentContacts)): ?>
-                    <div style="max-height: 400px; overflow-y: auto;">
+                    <div class="contact-list-scroll">
                         <?php foreach ($recentContacts as $contact): ?>
                             <div class="mb-3 pb-3 border-bottom">
                                 <h6 class="mb-1">
                                     <strong><?= $contact['name'] ?></strong>
                                 </h6>
-                                <p class="mb-1" style="font-size: 14px; color: #666;">
+                                <p class="mb-1 admin-contact-email">
                                     <i class="fas fa-envelope"></i> <?= $contact['email'] ?>
                                 </p>
-                                <p class="mb-2" style="font-size: 13px;">
+                                <p class="mb-2 admin-contact-message">
                                     <?= substr($contact['message'], 0, 60) ?>...
                                 </p>
                                 <small class="text-muted">

@@ -6,7 +6,7 @@
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-shopping-cart"></i> Checkout</h1>
             <p class="mt-2">Selesaikan pembelian Anda</p>
@@ -24,15 +24,15 @@
             <div class="row">
                 <!-- Cart Items -->
                 <div class="col-lg-8 mb-4">
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                    <div class="card card-elevated">
+                        <div class="card-header card-header-primary">
                             <h5 class="mb-0"><i class="fas fa-list"></i> Daftar Produk</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                        <tr style="background-color: var(--light-bg);">
+                                        <tr class="table-row-light">
                                             <th>Produk</th>
                                             <th>Harga</th>
                                             <th>Jumlah</th>
@@ -48,9 +48,9 @@
                                                 </td>
                                                 <td>Rp <?= number_format($item['product_price'], 0, ',', '.') ?></td>
                                                 <td>
-                                                    <div class="input-group" style="max-width: 100px;">
+                                                    <div class="input-group quantity-control--compact">
                                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="decreaseQty(<?= $item['product_id'] ?>)">-</button>
-                                                        <input type="number" value="<?= $item['quantity'] ?>" min="1" class="form-control text-center" style="font-size: 14px;" onchange="updateQuantity(<?= $item['product_id'] ?>, this.value)">
+                                                        <input type="number" value="<?= $item['quantity'] ?>" min="1" class="form-control text-center form-control--small-text" onchange="updateQuantity(<?= $item['product_id'] ?>, this.value)">
                                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="increaseQty(<?= $item['product_id'] ?>)">+</button>
                                                     </div>
                                                 </td>
@@ -74,8 +74,8 @@
                 <!-- Order Summary & Form -->
                 <div class="col-lg-4">
                     <!-- Order Summary -->
-                    <div class="card mb-4" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                    <div class="card mb-4 card-elevated">
+                        <div class="card-header card-header-primary">
                             <h5 class="mb-0"><i class="fas fa-receipt"></i> Ringkasan Pesanan</h5>
                         </div>
                         <div class="card-body">
@@ -90,14 +90,14 @@
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <strong>Total:</strong>
-                                <strong style="font-size: 20px; color: var(--primary-color);">Rp <?= number_format($total, 0, ',', '.') ?></strong>
+                                <strong class="order-total">Rp <?= number_format($total, 0, ',', '.') ?></strong>
                             </div>
                         </div>
                     </div>
 
                     <!-- Checkout Form -->
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                        <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                    <div class="card card-elevated">
+                        <div class="card-header card-header-primary">
                             <h5 class="mb-0"><i class="fas fa-user"></i> Data Pemesan</h5>
                         </div>
                         <div class="card-body">

@@ -22,7 +22,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card product-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-globe fa-3x" style="color: var(--primary-color); margin-bottom: 20px;"></i>
+                        <i class="fas fa-globe fa-3x icon-primary icon-primary--large-gap"></i>
                         <h5 class="card-title">Konteks Global, Lokal untuk Anda</h5>
                         <p class="card-text">
                             Kami memahami tren kesehatan global dan menghadirkannya dengan sentuhan lokal yang disesuaikan dengan kebutuhan Indonesia.
@@ -35,7 +35,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card product-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-heartbeat fa-3x" style="color: var(--primary-color); margin-bottom: 20px;"></i>
+                        <i class="fas fa-heartbeat fa-3x icon-primary icon-primary--large-gap"></i>
                         <h5 class="card-title">Solusi Tantangan Kesehatan</h5>
                         <p class="card-text">
                             Tantangan kesehatan modern membutuhkan solusi inovatif. Kami menyediakan produk vegetarian berkualitas untuk gaya hidup sehat Anda.
@@ -48,7 +48,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card product-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-star fa-3x" style="color: var(--primary-color); margin-bottom: 20px;"></i>
+                        <i class="fas fa-star fa-3x icon-primary icon-primary--large-gap"></i>
                         <h5 class="card-title">Kompetensi & Pengalaman</h5>
                         <p class="card-text">
                             Dengan pengalaman bertahun-tahun dalam industri vegetarian, kami menjamin kualitas terbaik untuk setiap produk.
@@ -61,7 +61,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card product-card h-100">
                     <div class="card-body text-center">
-                        <i class="fas fa-leaf fa-3x" style="color: var(--primary-color); margin-bottom: 20px;"></i>
+                        <i class="fas fa-leaf fa-3x icon-primary icon-primary--large-gap"></i>
                         <h5 class="card-title">Penyebab: Planet & Kesehatan</h5>
                         <p class="card-text">
                             Kami berkomitmen untuk planet yang lebih hijau dan masyarakat yang lebih sehat melalui pilihan makanan vegetarian.
@@ -73,7 +73,7 @@
     </section>
 
     <!-- Featured Products -->
-    <section style="background-color: var(--light-bg);">
+    <section class="section-muted">
         <div class="container">
             <h2 class="section-title">Produk <span class="highlight">Pilihan</span></h2>
             
@@ -82,16 +82,16 @@
                     <?php foreach ($featured_products as $product): ?>
                         <div class="col-md-6 col-lg-4 mb-4">
                             <div class="card product-card">
-                                <div class="card-img-top" style="background-color: var(--light-bg); display: flex; align-items: center; justify-content: center;">
+                                <div class="card-img-top image-placeholder">
                                     <?php if ($product['image']): ?>
-                                        <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-height: 250px; object-fit: cover;">
+                                        <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid product-image">
                                     <?php else: ?>
-                                        <i class="fas fa-image fa-4x" style="color: #ccc;"></i>
+                                        <i class="fas fa-image fa-4x icon-placeholder"></i>
                                     <?php endif; ?>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $product['name'] ?></h5>
-                                    <p class="card-text text-muted" style="height: 60px; overflow: hidden;">
+                                    <p class="card-text text-muted product-description-clamp">
                                         <?= substr($product['description'], 0, 100) ?>...
                                     </p>
                                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -132,14 +132,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 mb-4 mb-md-0">
-                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">
+                    <h3 class="about-heading">
                         <i class="fas fa-comments"></i> Pertanyaan Anda?
                     </h3>
                     <p>Tim kami siap membantu Anda 24/7 untuk menjawab semua pertanyaan tentang produk kami.</p>
                     <a href="/dashboard/contact" class="btn btn-primary">Hubungi Kami Sekarang</a>
                 </div>
                 <div class="col-md-6">
-                    <h3 style="color: var(--primary-color); margin-bottom: 15px;">
+                    <h3 class="about-heading">
                         <i class="fas fa-shipping-fast"></i> Pengiriman Cepat & Aman
                     </h3>
                     <p>Kami menggaransi produk sampai dalam kondisi terbaik dengan pengiriman ke seluruh Indonesia.</p>

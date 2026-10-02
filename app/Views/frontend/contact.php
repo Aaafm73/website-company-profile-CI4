@@ -4,7 +4,7 @@
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-envelope"></i> Hubungi Kami</h1>
             <p class="mt-2">Kami siap membantu Anda</p>
@@ -19,7 +19,7 @@
                 <div class="contact-column">
                     <div class="card mb-4 contact-card">
                         <div class="card-body text-center">
-                            <i class="fas fa-phone fa-3x" style="color: var(--primary-color); margin-bottom: 15px;"></i>
+                            <i class="fas fa-phone fa-3x icon-primary"></i>
                             <h5 class="card-title">Telepon</h5>
                                 <p class="card-text"><?= isset($company_phone) && $company_phone ? esc($company_phone) : '+62 XXX XXXX' ?></p>
                         </div>
@@ -27,7 +27,7 @@
 
                     <div class="card mb-4 contact-card">
                         <div class="card-body text-center">
-                            <i class="fas fa-envelope fa-3x" style="color: var(--primary-color); margin-bottom: 15px;"></i>
+                            <i class="fas fa-envelope fa-3x icon-primary"></i>
                             <h5 class="card-title">Email</h5>
                                 <p class="card-text"><?= isset($company_email) && $company_email ? esc($company_email) : 'info@example.com' ?></p>
                         </div>
@@ -35,7 +35,7 @@
 
                     <div class="card contact-card">
                         <div class="card-body text-center">
-                            <i class="fas fa-map-marker-alt fa-3x" style="color: var(--primary-color); margin-bottom: 15px;"></i>
+                            <i class="fas fa-map-marker-alt fa-3x icon-primary"></i>
                             <h5 class="card-title">Alamat</h5>
                                 <p class="card-text"><?php if (isset($company_address) && $company_address): ?>
                                     <?= nl2br(esc($company_address)) ?>
@@ -49,8 +49,8 @@
 
             <!-- Contact Form -->
             <div class="col-lg-8">
-                <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <div class="card-header" style="background-color: var(--primary-color); color: white;">
+                <div class="card card-elevated">
+                    <div class="card-header card-header-primary">
                         <h5 class="mb-0"><i class="fas fa-pen-fancy"></i> Kirim Pesan</h5>
                     </div>
                     <div class="card-body">
@@ -97,15 +97,15 @@
     </section>
 
     <!-- FAQ Section -->
-    <section style="background-color: var(--light-bg); padding: 60px 0;">
+    <section class="section-muted">
         <div class="container">
             <h2 class="section-title">Pertanyaan yang Sering <span class="highlight">Ditanyakan</span></h2>
 
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div class="card card-elevated">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: var(--primary-color);">
+                            <h5 class="card-title page-card-title">
                                 <i class="fas fa-question-circle"></i> Berapa lama pengiriman?
                             </h5>
                             <p class="card-text">Pengiriman biasanya memakan waktu 2-5 hari kerja tergantung lokasi Anda. Kami bekerja sama dengan jasa pengiriman terpercaya.</p>
@@ -114,9 +114,9 @@
                 </div>
 
                 <div class="col-md-6 mb-4">
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div class="card card-elevated">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: var(--primary-color);">
+                            <h5 class="card-title page-card-title">
                                 <i class="fas fa-question-circle"></i> Apakah produk organik?
                             </h5>
                             <p class="card-text">Mayoritas produk kami adalah organik atau minimal menggunakan bahan-bahan berkualitas tinggi tanpa pengawet berbahaya.</p>
@@ -125,9 +125,9 @@
                 </div>
 
                 <div class="col-md-6 mb-4">
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div class="card card-elevated">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: var(--primary-color);">
+                            <h5 class="card-title page-card-title">
                                 <i class="fas fa-question-circle"></i> Bagaimana dengan pengembalian barang?
                             </h5>
                             <p class="card-text">Jika ada kesalahan atau barang rusak, kami menerima pengembalian dalam 7 hari dengan syarat dan ketentuan berlaku.</p>
@@ -136,9 +136,9 @@
                 </div>
 
                 <div class="col-md-6 mb-4">
-                    <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div class="card card-elevated">
                         <div class="card-body">
-                            <h5 class="card-title" style="color: var(--primary-color);">
+                            <h5 class="card-title page-card-title">
                                 <i class="fas fa-question-circle"></i> Metode pembayaran apa saja?
                             </h5>
                             <p class="card-text">Kami menerima transfer bank dan bayar di tempat (COD). Proses verifikasi pembayaran biasanya 1-2 jam.</p>

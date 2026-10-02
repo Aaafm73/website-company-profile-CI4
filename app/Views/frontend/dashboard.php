@@ -4,7 +4,7 @@
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-tachometer-alt"></i> Dashboard Pelanggan</h1>
             <p class="mt-2">Kelola pesanan dan lacak pengiriman Anda</p>
@@ -28,8 +28,8 @@
             </form>
         </div>
 
-        <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-            <div class="card-header" style="background-color: var(--primary-color); color: white;">
+        <div class="card card-elevated">
+            <div class="card-header card-header-primary">
                 <h5 class="mb-0"><i class="fas fa-search"></i> Lacak Pesanan</h5>
             </div>
             <div class="card-body">
@@ -63,20 +63,20 @@
                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="copyOrderId('<?= $selectedOrder['order_number'] ?>')"><i class="fas fa-copy"></i> Salin ID</button>
                     </div>
                     <div class="mb-4">
-                        <div class="d-flex justify-content-between align-items-center" style="gap: 8px; flex-wrap: wrap;">
+                        <div class="d-flex justify-content-between align-items-center dashboard-progress-row">
                             <?php foreach ($statusSteps as $idx => $step): ?>
-                                <div class="text-center flex-fill" style="min-width: 100px;">
-                                    <div style="background-color: <?= $idx <= $currentStatusIndex ? 'var(--primary-color)' : '#ccc' ?>; color: white; width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 8px; font-weight: bold;">
+                                <div class="text-center flex-fill dashboard-progress-step">
+                                    <div class="dashboard-progress-circle <?= $idx <= $currentStatusIndex ? 'is-complete' : '' ?>">
                                         <?= $idx + 1 ?>
                                     </div>
-                                    <div style="font-size: 13px;"><?= $statusLabel[$step] ?></div>
+                                    <div class="dashboard-progress-label"><?= $statusLabel[$step] ?></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-sm">
-                            <thead style="background-color: var(--light-bg);">
+                            <thead class="table-head-light">
                                 <tr>
                                     <th>Produk</th>
                                     <th>Harga</th>

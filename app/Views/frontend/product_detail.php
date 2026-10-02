@@ -7,7 +7,7 @@
         $relatedProducts = isset($relatedProducts) ? (array) $relatedProducts : [];
     ?>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-info-circle"></i> Detail Produk</h1>
         </div>
@@ -26,22 +26,22 @@
     <section class="container my-5">
         <div class="row">
             <div class="col-md-6 mb-4">
-                <div style="background-color: var(--light-bg); border-radius: 10px; padding: 30px; text-align: center;">
+                <div class="product-detail-image">
                     <?php if (!empty($product['image'])): ?>
-                        <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid" style="max-height: 400px; object-fit: cover;">
+                        <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="img-fluid product-image product-image--large">
                     <?php else: ?>
-                        <i class="fas fa-image fa-5x" style="color: #ccc;"></i>
+                        <i class="fas fa-image fa-5x icon-placeholder"></i>
                     <?php endif; ?>
                 </div>
             </div>
 
             <div class="col-md-6 mb-4">
-                <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <div class="card card-elevated">
                     <div class="card-body">
                         <h2 class="card-title mb-3"><?= $product['name'] ?></h2>
                         
                         <div class="mb-4">
-                            <span class="badge bg-info" style="font-size: 14px; padding: 5px 10px;">
+                            <span class="badge bg-info category-badge-display">
                                 <?= $product['category'] ?>
                             </span>
                         </div>
@@ -72,9 +72,9 @@
                             <div class="mb-3">
                                 <label for="quantity" class="form-label">Jumlah:</label>
                                 <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
-                                <div class="input-group" style="max-width: 150px;">
+                                <div class="input-group quantity-control--medium">
                                     <button type="button" class="btn btn-outline-secondary" onclick="decreaseQty()">-</button>
-                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?= $product['stock'] ?>" class="form-control" style="text-align: center;">
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="<?= $product['stock'] ?>" class="form-control form-control--centered">
                                     <button type="button" class="btn btn-outline-secondary" onclick="increaseQty(<?= $product['stock'] ?>)">+</button>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
 
     <!-- Related Products -->
     <?php if (!empty($relatedProducts) && count($relatedProducts) > 1): ?>
-        <section style="background-color: var(--light-bg); padding: 60px 0;">
+        <section class="section-muted">
             <div class="container">
                 <h2 class="section-title">Produk <span class="highlight">Sejenis</span></h2>
                 
@@ -104,21 +104,21 @@
                         <?php if ($related['id'] != $product['id']): ?>
                             <div class="col-sm-6 col-lg-4 mb-4">
                                 <div class="card product-card">
-                                    <div class="card-img-top" style="background-color: white; display: flex; align-items: center; justify-content: center;">
+                                    <div class="card-img-top image-placeholder image-placeholder--white">
                                         <?php if ($related['image']): ?>
-                                            <img src="<?= base_url($related['image']) ?>" alt="<?= $related['name'] ?>" class="img-fluid" style="max-height: 250px; object-fit: cover;">
+                                            <img src="<?= base_url($related['image']) ?>" alt="<?= $related['name'] ?>" class="img-fluid product-image">
                                         <?php else: ?>
-                                            <i class="fas fa-image fa-4x" style="color: #ccc;"></i>
+                                            <i class="fas fa-image fa-4x icon-placeholder"></i>
                                         <?php endif; ?>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $related['name'] ?></h5>
-                                        <p class="card-text text-muted" style="height: 60px; overflow: hidden; font-size: 14px;">
+                                        <p class="card-text text-muted product-description-clamp product-description-clamp--small">
                                             <?= substr($related['description'], 0, 80) ?>...
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <span class="product-price">Rp <?= number_format($related['price'], 0, ',', '.') ?></span>
-                                            <span class="product-stock" style="font-size: 12px;">
+                                            <span class="product-stock product-stock--small">
                                                 <?php if ($related['stock'] > 0): ?>
                                                     <span class="badge bg-success">Tersedia</span>
                                                 <?php else: ?>

@@ -3,7 +3,7 @@
 <!-- Main Content -->
 <main>
     <!-- Page Title -->
-    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; padding: 40px 0;">
+    <section class="page-title">
         <div class="container">
             <h1><i class="fas fa-search"></i> Hasil Pelacakan Pesanan</h1>
         </div>
@@ -16,8 +16,8 @@
                 <i class="fas fa-exclamation-circle"></i> Pesanan tidak ditemukan. Silahkan periksa kembali email dan nomor pesanan Anda.
             </div>
         <?php else: ?>
-            <div class="card" style="border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                <div class="card-header" style="background-color: var(--primary-color); color: white;">
+            <div class="card card-elevated">
+                <div class="card-header card-header-primary">
                     <h5 class="mb-0">
                         <i class="fas fa-box"></i> Pesanan #<?= $order['order_number'] ?>
                     </h5>
@@ -57,11 +57,11 @@
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <?php foreach ($statusList as $idx => $status): ?>
                                     <div class="text-center flex-grow-1">
-                                        <div style="<?= $idx <= $currentStatusIndex ? 'background-color: var(--primary-color);' : 'background-color: #ccc;' ?> color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; margin-bottom: 10px; font-weight: bold;">
+                                        <div class="order-timeline-circle <?= $idx <= $currentStatusIndex ? 'is-complete' : '' ?>">
                                             <?php if ($idx < $currentStatusIndex): ?>
                                                 <i class="fas fa-check"></i>
                                             <?php elseif ($idx == $currentStatusIndex): ?>
-                                                <i class="fas fa-circle-notch" style="animation: spin 1s linear infinite;"></i>
+                                                <i class="fas fa-circle-notch spin-animation"></i>
                                             <?php else: ?>
                                                 <?= $idx + 1 ?>
                                             <?php endif; ?>
@@ -69,7 +69,7 @@
                                         <small><?= str_replace(' ', '<br>', $statusLabel[$status]) ?></small>
                                     </div>
                                     <?php if ($idx < count($statusList) - 1): ?>
-                                        <div style="flex-grow: 1; height: 3px; background-color: <?= $idx < $currentStatusIndex ? 'var(--primary-color)' : '#ccc' ?>; margin-bottom: 25px;"></div>
+                                        <div class="order-timeline-connector <?= $idx < $currentStatusIndex ? 'is-complete' : '' ?>"></div>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             </div>
@@ -82,7 +82,7 @@
                     <h6 class="mb-3"><i class="fas fa-list"></i> Detail Produk</h6>
                     <div class="table-responsive mb-3">
                         <table class="table table-sm">
-                            <thead style="background-color: var(--light-bg);">
+                            <thead class="table-head-light">
                                 <tr>
                                     <th>Produk</th>
                                     <th>Harga</th>
@@ -99,7 +99,7 @@
                                         <td>Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
                                     </tr>
                                 <?php endforeach; ?>
-                                <tr style="background-color: var(--light-bg);">
+                                <tr class="table-row-light">
                                     <td colspan="3" class="text-end"><strong>Total:</strong></td>
                                     <td><strong>Rp <?= number_format($order['total_amount'], 0, ',', '.') ?></strong></td>
                                 </tr>
@@ -127,16 +127,5 @@
         </div>
     </section>
 </main>
-
-<style>
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-</style>
 
 <?php echo $this->include('frontend/layout/footer'); ?>

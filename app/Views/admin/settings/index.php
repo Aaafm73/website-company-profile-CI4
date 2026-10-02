@@ -57,7 +57,7 @@
             </div>
             <div class="card-body">
                 <p><strong>Tips Pengaturan:</strong></p>
-                <ul style="font-size: 14px;">
+                <ul class="admin-font-small">
                     <li>Pastikan informasi perusahaan selalu update</li>
                     <li>Gunakan nomor telepon yang aktif</li>
                     <li>Email harus dapat menerima notifikasi</li>
@@ -71,7 +71,7 @@
             <div class="card-header">
                 <h5 class="mb-0"><i class="fas fa-link"></i> Link Penting</h5>
             </div>
-            <div class="card-body" style="font-size: 14px;">
+            <div class="card-body admin-font-small">
                 <p>
                     <a href="/" target="_blank" class="btn btn-sm btn-outline-primary">
                         <i class="fas fa-globe"></i> Lihat Website

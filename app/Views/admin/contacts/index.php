@@ -27,7 +27,7 @@ $pager = $pager ?? null;
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead style="background-color: var(--light-bg);">
+                <thead class="table-head-light">
                     <tr>
                         <th>Nama</th>
                         <th>Email</th>
@@ -58,7 +58,7 @@ $pager = $pager ?? null;
                                     <i class="fas fa-eye"></i>
                                 </a>
                                 <!-- Use SweetAlert2 confirmation, then submit POST with CSRF token -->
-                                <form action="/admin/contacts/delete/<?= $contact['id'] ?>" method="POST" style="display:inline-block; margin:0;" onsubmit="event.preventDefault(); deleteConfirm(this.action, '<?= esc($contact['name']) ?>');">
+                                <form action="/admin/contacts/delete/<?= $contact['id'] ?>" method="POST" class="inline-action-form" onsubmit="event.preventDefault(); deleteConfirm(this.action, '<?= esc($contact['name']) ?>');">
                                     <?= csrf_field() ?>
                                     <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>

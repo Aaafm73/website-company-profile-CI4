@@ -20,7 +20,7 @@ $pager = $pager ?? null;
         <!-- Filter -->
         <div class="mb-3">
             <form method="GET" class="d-flex gap-2">
-                <select name="category" class="form-select" style="max-width: 200px;">
+                <select name="category" class="form-select admin-category-filter">
                     <option value="">Semua Kategori</option>
                     <?php foreach ($categories as $cat): ?>
                         <option value="<?= $cat['id'] ?>" <?= (string) $selected_category === (string) $cat['id'] ? 'selected' : '' ?>>
@@ -36,7 +36,7 @@ $pager = $pager ?? null;
 
         <div class="table-responsive">
             <table class="table table-hover">
-                <thead style="background-color: var(--light-bg);">
+                <thead class="table-head-light">
                     <tr>
                         <th>Gambar</th>
                         <th>Nama Produk</th>
@@ -52,9 +52,9 @@ $pager = $pager ?? null;
                         <tr>
                             <td>
                                 <?php if ($product['image']): ?>
-                                    <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" style="max-height: 50px; max-width: 50px; border-radius: 5px;">
+                                    <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="admin-image-thumb">
                                 <?php else: ?>
-                                    <i class="fas fa-image" style="color: #ccc;"></i>
+                                    <i class="fas fa-image icon-placeholder"></i>
                                 <?php endif; ?>
                             </td>
                             <td><strong><?= $product['name'] ?></strong></td>
@@ -73,7 +73,7 @@ $pager = $pager ?? null;
                                     <i class="fas fa-edit"></i>
                                 </a>
                                 <!-- Use SweetAlert2 confirmation, then submit POST with CSRF token -->
-                                <form action="/admin/products/delete/<?= $product['id'] ?>" method="POST" style="display:inline-block; margin:0;" onsubmit="event.preventDefault(); deleteConfirm(this.action, '<?= esc($product['name']) ?>');">
+                                <form action="/admin/products/delete/<?= $product['id'] ?>" method="POST" class="inline-action-form" onsubmit="event.preventDefault(); deleteConfirm(this.action, '<?= esc($product['name']) ?>');">
                                     <?= csrf_field() ?>
                                     <button type="submit" class="btn btn-sm btn-danger">
                                         <i class="fas fa-trash"></i>

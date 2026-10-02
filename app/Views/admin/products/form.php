@@ -54,7 +54,7 @@
                         <label for="image" class="form-label">Gambar Produk</label>
                         <?php if (isset($product) && $product['image']): ?>
                             <div class="mb-2">
-                                <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" style="max-height: 150px; border-radius: 5px;">
+                                <img src="<?= base_url($product['image']) ?>" alt="<?= $product['name'] ?>" class="admin-image-preview">
                             </div>
                         <?php endif; ?>
                         <input type="file" class="form-control" id="image" name="image" accept="image/*">
@@ -81,7 +81,7 @@
             </div>
             <div class="card-body">
                 <h6>Panduan Pengisian:</h6>
-                <ul style="font-size: 14px;">
+                <ul class="admin-font-small">
                     <li>Nama produk harus unik dan deskriptif</li>
                     <li>Deskripsi harus menjelaskan manfaat produk</li>
                     <li>Harga dalam Rupiah tanpa tanda khusus</li>

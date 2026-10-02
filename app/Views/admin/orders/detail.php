@@ -29,7 +29,7 @@
                 <h6 class="mb-3"><i class="fas fa-list"></i> Detail Produk</h6>
                 <div class="table-responsive">
                     <table class="table table-sm">
-                        <thead style="background-color: var(--light-bg);">
+                        <thead class="table-head-light">
                             <tr>
                                 <th>Produk</th>
                                 <th>Harga</th>
@@ -46,7 +46,7 @@
                                     <td>Rp <?= number_format($item['subtotal'], 0, ',', '.') ?></td>
                                 </tr>
                             <?php endforeach; ?>
-                            <tr style="background-color: var(--light-bg);">
+                            <tr class="table-row-light">
                                 <td colspan="3" class="text-end"><strong>Total:</strong></td>
                                 <td><strong>Rp <?= number_format($order['total_amount'], 0, ',', '.') ?></strong></td>
                             </tr>
