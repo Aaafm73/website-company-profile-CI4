@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateProductsTable extends Migration
 {
+    // Membuat tabel produk beserta harga, stok, dan data kategorinya.
     public function up()
     {
         $this->forge->addField([
@@ -53,6 +54,7 @@ class CreateProductsTable extends Migration
         $this->forge->createTable('products');
     }
 
+    // Menghapus tabel produk saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('products');

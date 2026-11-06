@@ -7,6 +7,7 @@ use CodeIgniter\Test\CIUnitTestCase;
  */
 final class ExampleSessionTest extends CIUnitTestCase
 {
+    // Memastikan nilai sesi dapat disimpan dan dibaca kembali.
     public function testSessionSimple(): void
     {
         $session = service('session');

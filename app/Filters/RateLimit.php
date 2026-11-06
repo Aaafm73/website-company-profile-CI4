@@ -17,6 +17,7 @@ class RateLimit implements FilterInterface
         'cart' => [60, 60],
     ];
 
+    // Membatasi jumlah permintaan berdasarkan alamat klien dan cakupan route.
     public function before(RequestInterface $request, $arguments = null)
     {
         $scope = $arguments[0] ?? '';

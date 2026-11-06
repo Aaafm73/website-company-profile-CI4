@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateSettingsTable extends Migration
 {
+    // Membuat tabel untuk menyimpan pengaturan perusahaan.
     public function up()
     {
         $this->forge->addField([
@@ -36,6 +37,7 @@ class CreateSettingsTable extends Migration
         $this->forge->createTable('settings');
     }
 
+    // Menghapus tabel pengaturan saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('settings');

@@ -13,6 +13,7 @@ class Orders extends BaseAdminController
     protected $orderItemModel;
     protected $productModel;
 
+    // Menyiapkan model pesanan, item, dan stok produk.
     public function __construct()
     {
         $this->orderModel = new OrderModel();

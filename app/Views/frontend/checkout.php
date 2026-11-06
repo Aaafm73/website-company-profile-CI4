@@ -1,4 +1,4 @@
-<?php echo $this->include('frontend/layout/header'); ?>
+<?php echo $this->include('frontend/layout/header_katalog'); ?>
 <?php echo $this->include('frontend/_defaults'); ?>
 
 <?php $total = $total ?? 0; ?>
@@ -17,7 +17,7 @@
     <section class="container my-5">
         <?php if (empty($cart)): ?>
             <div class="alert alert-info text-center" role="alert">
-                <i class="fas fa-info-circle"></i> Keranjang belanja Anda kosong. 
+                <i class="fas fa-info-circle"></i> Keranjang belanja Anda kosong.
                 <a href="/products" class="alert-link">Kembali ke katalog produk</a>
             </div>
         <?php else: ?>
@@ -101,7 +101,7 @@
                             <h5 class="mb-0"><i class="fas fa-user"></i> Data Pemesan</h5>
                         </div>
                         <div class="card-body">
-                            <form action="<?= site_url('checkout/process') ?>" method="POST">
+                            <form id="checkout-form" action="<?= site_url('checkout/process') ?>" method="POST">
                                 <?= csrf_field() ?>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nama Lengkap *</label>
@@ -127,7 +127,7 @@
                                     <label for="payment" class="form-label">Metode Pembayaran *</label>
                                     <select class="form-select" id="payment" name="payment_method" required>
                                         <option value="">Pilih Metode Pembayaran</option>
-                                        <option value="transfer">Transfer Bank</option>
+                                        <option value="transfer">Transfer</option>
                                         <option value="cod">Bayar di Tempat (COD)</option>
                                     </select>
                                 </div>
@@ -137,8 +137,8 @@
                                     <textarea class="form-control" id="notes" name="notes" rows="2" placeholder="Catatan tambahan untuk pesanan Anda"></textarea>
                                 </div>
 
-                                <button type="submit" class="btn btn-add-cart w-100 btn-lg">
-                                    <i class="fas fa-check-circle"></i> Proses Pesanan
+                                <button type="button"  id="btn-prosess" class="btn btn-add-cart w-100 btn-lg">
+                                    <i class="fas fa-check-circle"></i> Checkout
                                 </button>
                             </form>
                         </div>
@@ -149,7 +149,12 @@
     </section>
 </main>
 
+<script type="text/javascript"
+        src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="SB-Mid-client-ygj8z-MEbfC3qftL1EFbAhrS"></script>
 <script>
+    // --- SCRIPT ATAS (Fungsi Pengatur Keranjang Belanja Anda) ---
+    // Mengurangi jumlah item dan menyimpan perubahan ke keranjang server.
     function decreaseQty(productId) {
         let input = event.target.parentElement.querySelector('input');
         if (input.value > 1) {
@@ -158,12 +163,14 @@
         }
     }
 
+    // Menambah jumlah item lalu menyinkronkannya dengan keranjang server.
     function increaseQty(productId) {
         let input = event.target.parentElement.querySelector('input');
         input.value = parseInt(input.value) + 1;
         updateQuantity(productId, input.value);
     }
 
+    // Mengirim jumlah item terbaru ke endpoint keranjang.
     function updateQuantity(productId, quantity) {
         fetch('<?= site_url('checkout/update-cart') ?>', {
             method: 'POST',
@@ -179,6 +186,88 @@
             }
         });
     }
+
+    // --- SCRIPT BAWAH (Logika Pengirim Checkout COD / Transfer) ---
+    // Menangani checkout setelah tombol siap dan memvalidasi formulir sebelum mengirimnya.
+    window.addEventListener('DOMContentLoaded', (event) => {
+        const payButton = document.getElementById('btn-prosess');
+
+        if (payButton) {
+            payButton.addEventListener('click', function(e) {
+                const form = document.getElementById('checkout-form');
+                const paymentMethod = document.getElementById('payment').value;
+
+                // Validasi HTML5 bawaan browser (memastikan data nama, email, alamat terisi)
+                if (!form.reportValidity()) {
+                    return;
+                }
+
+                if (paymentMethod === 'cod') {
+                    // Jika COD, langsung kirim form biasa secara normal ke controller
+                    form.submit();
+                } else if (paymentMethod === 'transfer') {
+                    const formData = new FormData(form);
+
+                    // Diubah ke URL controller pemroses utama kita
+                    fetch('<?= site_url('checkout/process') ?>', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            // Munculkan pop-up Midtrans Snap
+                            snap.pay(data.snap_token, {
+                                onSuccess: async function(result) {
+                                    const confirmationData = new FormData();
+                                    confirmationData.append('order_id', data.order_id);
+
+                                    try {
+                                        const response = await fetch('<?= site_url('checkout/confirm-payment') ?>', {
+                                            method: 'POST',
+                                            body: confirmationData,
+                                            headers: {
+                                                'X-Requested-With': 'XMLHttpRequest'
+                                            }
+                                        });
+                                        const confirmation = await response.json();
+
+                                        if (!response.ok || confirmation.status !== 'success') {
+                                            alert(confirmation.message || 'Pembayaran belum dapat dikonfirmasi.');
+                                            return;
+                                        }
+
+                                        window.location.href = confirmation.redirect_url;
+                                    } catch (error) {
+                                        console.error('Error:', error);
+                                        alert('Pembayaran berhasil, tetapi konfirmasi ke server gagal. Silakan coba lagi.');
+                                    }
+                                },
+                                onPending: function(result) {
+                                    window.location.href = '<?= site_url("checkout/pending?order_id=") ?>' + data.order_id;
+                                },
+                                onError: function(result) {
+                                    alert("Pembayaran gagal!");
+                                },
+                                onClose: function() {
+                                    alert('Anda menutup pop-up sebelum menyelesaikan pembayaran.');
+                                }
+                            });
+                        } else {
+                            alert('Gagal mengambil token pembayaran: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan sistem saat meminta token.');
+                    });
+                }
+            });
+        }
+    });
 </script>
 
-<?php echo $this->include('frontend/layout/footer'); ?>
+<?php echo $this->include('frontend/layout/footer_katalog'); ?>

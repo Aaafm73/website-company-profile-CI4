@@ -1,4 +1,4 @@
-<?php echo $this->include('frontend/layout/header'); ?>
+<?php echo $this->include('frontend/layout/header_katalog'); ?>
 <?php echo $this->include('frontend/_defaults'); ?>
 
 <!-- Main Content -->
@@ -6,7 +6,7 @@
     <!-- Page Title -->
     <section class="page-title">
         <div class="container">
-            <h1><i class="fas fa-tachometer-alt"></i> Dashboard Pelanggan</h1>
+            <h1><i class="fas fa-tachometer-alt"></i> Lacak Pesanan</h1>
             <p class="mt-2">Kelola pesanan dan lacak pengiriman Anda</p>
         </div>
     </section>
@@ -111,6 +111,7 @@
 </main>
 
 <script>
+    // Menyalin nomor pesanan ke clipboard dan menampilkan hasilnya kepada pelanggan.
     function copyOrderId(orderNumber) {
         navigator.clipboard.writeText(orderNumber).then(function() {
             // Use the global toast helper defined in footer.php
@@ -130,4 +131,4 @@
     }
 </script>
 
-<?php echo $this->include('frontend/layout/footer'); ?>
+<?php echo $this->include('frontend/layout/footer_katalog'); ?>

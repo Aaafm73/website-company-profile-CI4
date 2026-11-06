@@ -22,11 +22,13 @@ class AdminUserModel extends Model
         'full_name' => 'required|string|max_length[255]',
     ];
 
+    // Mengambil akun admin aktif berdasarkan nama pengguna.
     public function getUserByUsername($username)
     {
         return $this->where('username', $username)->where('is_active', true)->first();
     }
 
+    // Mencatat waktu login terakhir untuk akun admin.
     public function updateLastLogin($userId)
     {
         return $this->update($userId, ['last_login' => date('Y-m-d H:i:s')]);

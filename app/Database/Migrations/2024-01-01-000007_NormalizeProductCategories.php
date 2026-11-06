@@ -8,6 +8,7 @@ class NormalizeProductCategories extends Migration
 {
     private const FOREIGN_KEY = 'fk_products_category';
 
+    // Memindahkan kategori teks lama ke tabel kategori dan menambah relasi produk.
     public function up()
     {
         $this->forge->addField([
@@ -86,6 +87,7 @@ class NormalizeProductCategories extends Migration
         $this->forge->dropColumn('products', 'category');
     }
 
+    // Mengembalikan kategori ke kolom teks dan menghapus tabel kategori.
     public function down()
     {
         $this->forge->addColumn('products', [

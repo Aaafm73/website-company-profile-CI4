@@ -10,12 +10,14 @@ class Home extends BaseController
     protected $productModel;
     protected $settingModel;
 
+    // Menyiapkan model untuk data produk dan pengaturan perusahaan.
     public function __construct()
     {
         $this->productModel = new ProductModel();
         $this->settingModel = new SettingModel();
     }
 
+    // Menampilkan beranda dengan informasi perusahaan dan produk terbaru.
     public function index()
     {
         $data = [
@@ -32,6 +34,7 @@ class Home extends BaseController
         return view('frontend/home', $data);
     }
 
+    // Menampilkan informasi profil perusahaan.
     public function about()
     {
         $data = [

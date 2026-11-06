@@ -9,11 +9,13 @@ class Auth extends BaseController
 {
     protected $adminUserModel;
 
+    // Menyiapkan model akun admin untuk proses autentikasi.
     public function __construct()
     {
         $this->adminUserModel = new AdminUserModel();
     }
 
+    // Menampilkan formulir login dan membersihkan sesi admin lama.
     public function login()
     {
         if (session('admin_user')) {
@@ -28,6 +30,7 @@ class Auth extends BaseController
         return view('admin/login', $data);
     }
 
+    // Memvalidasi kredensial lalu membuat sesi admin yang baru.
     public function processLogin()
     {
         $rules = [
@@ -65,6 +68,7 @@ class Auth extends BaseController
         return redirect()->to(site_url('admin/dashboard'))->with('message', 'Selamat datang, ' . $user['full_name']);
     }
 
+    // Menghapus sesi autentikasi dan mengarahkan admin ke halaman login.
     public function logout()
     {
         session()->remove('admin_user');

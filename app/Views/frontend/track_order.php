@@ -1,4 +1,4 @@
-<?php echo $this->include('frontend/layout/header'); ?>
+<?php echo $this->include('frontend/layout/header_katalog'); ?>
 
 <!-- Main Content -->
 <main>
@@ -128,4 +128,4 @@
     </section>
 </main>
 
-<?php echo $this->include('frontend/layout/footer'); ?>
+<?php echo $this->include('frontend/layout/footer_katalog'); ?>

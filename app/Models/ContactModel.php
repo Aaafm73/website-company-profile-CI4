@@ -22,13 +22,4 @@ class ContactModel extends Model
         'message' => 'required|string',
     ];
 
-    public function getNewContacts()
-    {
-        return $this->where('status', 'new')->findAll();
-    }
-
-    public function getContactsByStatus($status)
-    {
-        return $this->where('status', $status)->orderBy('created_at', 'DESC')->findAll();
-    }
 }

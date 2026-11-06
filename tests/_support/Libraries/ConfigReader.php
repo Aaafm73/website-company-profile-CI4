@@ -13,6 +13,7 @@ use Config\App;
  */
 class ConfigReader extends App
 {
+    // Menghindari pemuatan nilai environment agar tes membaca konfigurasi file.
     public function __construct()
     {
     }

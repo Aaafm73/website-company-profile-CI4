@@ -1,4 +1,4 @@
-<?php echo $this->include('frontend/layout/header'); ?>
+<?php echo $this->include('frontend/layout/header_katalog'); ?>
 <?php echo $this->include('frontend/_defaults'); ?>
 
 <?php
@@ -98,4 +98,4 @@ $selected_category = $selected_category ?? '';
     </section>
 </main>
 
-<?php echo $this->include('frontend/layout/footer'); ?>
+<?php echo $this->include('frontend/layout/footer_katalog'); ?>

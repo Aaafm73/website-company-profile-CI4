@@ -6,6 +6,7 @@ use CodeIgniter\Database\Seeder;
 
 class ExampleSeeder extends Seeder
 {
+    // Mengisi data pabrik contoh yang dipakai oleh tes database.
     public function run(): void
     {
         $factories = [

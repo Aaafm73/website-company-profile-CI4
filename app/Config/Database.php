@@ -190,6 +190,7 @@ class Database extends Config
         ],
     ];
 
+    // Menerapkan pengaturan database dari environment dan memilih koneksi test saat testing.
     public function __construct()
     {
         parent::__construct();

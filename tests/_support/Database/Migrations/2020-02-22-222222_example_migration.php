@@ -8,6 +8,7 @@ class ExampleMigration extends Migration
 {
     protected $DBGroup = 'tests';
 
+    // Membuat tabel factories dan indeks yang dipakai oleh tes database.
     public function up(): void
     {
         $this->forge->addField('id');
@@ -30,6 +31,7 @@ class ExampleMigration extends Migration
         $this->forge->createTable('factories');
     }
 
+    // Menghapus tabel factories setelah tes selesai.
     public function down(): void
     {
         $this->forge->dropTable('factories');

@@ -24,6 +24,7 @@ class OrderModel extends Model
         'payment_method' => 'required|string',
     ];
 
+    // Membuat nomor pesanan unik dengan awalan tanggal hari ini.
     public function generateOrderNumber()
     {
         $prefix = 'ORD-' . date('Ymd') . '-';
@@ -32,6 +33,7 @@ class OrderModel extends Model
         return $prefix . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
+    // Mengambil pesanan dan melengkapinya dengan daftar item produk.
     public function getOrderWithItems($orderId)
     {
         $order = $this->find($orderId);

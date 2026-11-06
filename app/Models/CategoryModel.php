@@ -12,6 +12,7 @@ class CategoryModel extends Model
     protected $returnType = 'array';
     protected $allowedFields = ['name'];
 
+    // Mengambil kategori dalam urutan nama menaik.
     public function getOrderedCategories(): array
     {
         return $this->orderBy('name', 'ASC')->findAll();

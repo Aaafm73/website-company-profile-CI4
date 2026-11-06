@@ -9,6 +9,7 @@ class Contacts extends BaseAdminController
 {
     protected $contactModel;
 
+    // Menyiapkan model untuk pengelolaan pesan kontak.
     public function __construct()
     {
         $this->contactModel = new ContactModel();

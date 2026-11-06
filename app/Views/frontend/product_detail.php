@@ -1,4 +1,4 @@
-<?php echo $this->include('frontend/layout/header'); ?>
+<?php echo $this->include('frontend/layout/header_katalog'); ?>
 
 <!-- Main Content -->
 <main>
@@ -147,6 +147,7 @@
 </main>
 
 <script>
+    // Mengurangi jumlah produk pada formulir detail dengan batas minimum satu.
     function decreaseQty() {
         let qty = document.getElementById('quantity');
         if (qty.value > 1) {
@@ -154,6 +155,7 @@
         }
     }
 
+    // Menambah jumlah produk tanpa melewati stok maksimum.
     function increaseQty(max) {
         let qty = document.getElementById('quantity');
         if (qty.value < max) {
@@ -185,4 +187,4 @@
     }
 </script>
 
-<?php echo $this->include('frontend/layout/footer'); ?>
+<?php echo $this->include('frontend/layout/footer_katalog'); ?>

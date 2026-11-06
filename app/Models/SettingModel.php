@@ -15,12 +15,14 @@ class SettingModel extends Model
     protected $useTimestamps = true;
     protected $updatedField = 'updated_at';
 
+    // Mengambil nilai pengaturan atau nilai default jika tidak tersedia.
     public function getSetting($key, $default = null)
     {
         $setting = $this->where('key', $key)->first();
         return $setting ? $setting['value'] : $default;
     }
 
+    // Memperbarui pengaturan yang ada atau membuat pengaturan baru.
     public function setSetting($key, $value, $description = null)
     {
         $existing = $this->where('key', $key)->first();
@@ -36,6 +38,7 @@ class SettingModel extends Model
         }
     }
 
+    // Mengambil seluruh pengaturan sebagai pasangan nama dan nilai.
     public function getAllSettings()
     {
         $settings = $this->findAll();

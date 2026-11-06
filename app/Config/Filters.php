@@ -76,7 +76,7 @@ class Filters extends BaseFilters
         'before' => [
             'throttle:global',
             // 'honeypot',
-            'csrf',
+            // 'csrf',
             // 'invalidchars',
         ],
         'after' => [

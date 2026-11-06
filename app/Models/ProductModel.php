@@ -23,14 +23,7 @@ class ProductModel extends Model
         'stock' => 'integer',
     ];
 
-    public function getProductsByCategory($category)
-    {
-        return $this->select('products.*, categories.name AS category')
-            ->join('categories', 'categories.id = products.category_id')
-            ->where('categories.name', $category)
-            ->findAll();
-    }
-
+    // Mengambil semua produk dalam kategori tertentu.
     public function getProductsByCategoryId(int $categoryId)
     {
         return $this->select('products.*, categories.name AS category')
@@ -39,6 +32,7 @@ class ProductModel extends Model
             ->findAll();
     }
 
+    // Menyiapkan query produk beserta nama kategorinya, dengan filter kategori opsional.
     public function getProductsWithCategory(?int $categoryId = null)
     {
         $query = $this->select('products.*, categories.name AS category')
@@ -51,6 +45,7 @@ class ProductModel extends Model
         return $query;
     }
 
+    // Mengambil satu produk beserta nama kategorinya berdasarkan ID.
     public function getProductWithCategory(int $productId)
     {
         return $this->select('products.*, categories.name AS category')
@@ -58,6 +53,7 @@ class ProductModel extends Model
             ->find($productId);
     }
 
+    // Mengambil produk terbaru untuk ditampilkan sebagai produk unggulan.
     public function getPopularProducts($limit = 6)
     {
         return $this->orderBy('created_at', 'DESC')->limit($limit)->findAll();

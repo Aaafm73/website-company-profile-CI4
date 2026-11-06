@@ -12,6 +12,7 @@ class Products extends BaseController
     protected $categoryModel;
     protected $settingModel;
 
+    // Menyiapkan model produk, kategori, dan pengaturan perusahaan.
     public function __construct()
     {
         $this->productModel = new ProductModel();
@@ -19,6 +20,7 @@ class Products extends BaseController
         $this->settingModel = new SettingModel();
     }
 
+    // Menampilkan katalog dan menerapkan filter kategori yang dipilih.
     public function index()
     {
         $category = $this->request->getGet('category');
@@ -42,6 +44,7 @@ class Products extends BaseController
         return view('frontend/products', $data);
     }
 
+    // Menampilkan detail produk beserta produk lain dalam kategorinya.
     public function detail($id)
     {
         $product = $this->productModel->getProductWithCategory((int) $id);

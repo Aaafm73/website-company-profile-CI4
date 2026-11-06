@@ -9,11 +9,13 @@ use Tests\Support\Libraries\ConfigReader;
  */
 final class HealthTest extends CIUnitTestCase
 {
+    // Memastikan bootstrap aplikasi telah mendefinisikan jalur app.
     public function testIsDefinedAppPath(): void
     {
         $this->assertTrue(defined('APPPATH'));
     }
 
+    // Memastikan base URL dari environment atau konfigurasi valid.
     public function testBaseUrlHasBeenSet(): void
     {
         $validation = service('validation');

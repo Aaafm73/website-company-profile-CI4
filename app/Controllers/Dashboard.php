@@ -14,6 +14,7 @@ class Dashboard extends BaseController
     protected $contactModel;
     protected $settingModel;
 
+    // Menyiapkan model pesanan, item, kontak, dan pengaturan.
     public function __construct()
     {
         $this->orderModel = new OrderModel();
@@ -22,6 +23,7 @@ class Dashboard extends BaseController
         $this->settingModel = new SettingModel();
     }
 
+    // Menampilkan dashboard dan detail pesanan yang telah diotorisasi.
     public function index()
     {
         $orderId = (int) $this->request->getGet('order_id');
@@ -42,6 +44,7 @@ class Dashboard extends BaseController
         return view('frontend/dashboard', $data);
     }
 
+    // Menampilkan halaman kontak dengan informasi perusahaan.
     public function contact()
     {
         $data = [
@@ -55,6 +58,7 @@ class Dashboard extends BaseController
         return view('frontend/contact', $data);
     }
 
+    // Memvalidasi dan menyimpan pesan kontak yang dikirim pelanggan.
     public function sendContact()
     {
         $rules = [
@@ -80,6 +84,7 @@ class Dashboard extends BaseController
         return redirect()->to('/dashboard/contact')->with('message', 'Pesan Anda berhasil dikirim. Kami akan segera menghubungi Anda.');
     }
 
+    // Mengotorisasi pesanan berdasarkan email dan nomor pesanan pelanggan.
     public function trackOrder()
     {
         $email = trim((string) $this->request->getPost('email'));

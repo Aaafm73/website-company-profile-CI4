@@ -9,17 +9,17 @@
                 <div class="col-md-3 mb-4">
                     <h5>Menu</h5>
                     <ul class="footer-list">
-                        <li><a href="<?= site_url('/') ?>">Beranda</a></li>
-                        <li><a href="<?= site_url('about') ?>">Tentang Kami</a></li>
-                        <li><a href="<?= site_url('products') ?>">Katalog Produk</a></li>
-                        <li><a href="<?= site_url('dashboard/contact') ?>">Hubungi Kami</a></li>
+                        <li><a href="#home">Beranda</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                        <li><a href="#product">Produk</a></li>
+                        <li><a href="#contact">Hubungi Kami</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 mb-4">
                     <h5>Informasi</h5>
                     <ul class="footer-list">
-                        <li><i class="fas fa-phone"></i> <?= $company_phone ?? '+62 XXX XXXX' ?></li>
-                        <li><i class="fas fa-envelope"></i> <?= $company_email ?? 'info@example.com' ?></li>
+                        <li><i class="fas fa-phone"></i> <?= $company_phone ?? '+62 822 6212 1210' ?></li>
+                        <li><i class="fas fa-envelope"></i> <?= $company_email ?? 'vegetarianparadise@gmail.com' ?></li>
                         <li><i class="fas fa-map-marker-alt"></i> <?= substr($company_address ?? 'Alamat', 0, 30) ?>...</li>
                     </ul>
                 </div>

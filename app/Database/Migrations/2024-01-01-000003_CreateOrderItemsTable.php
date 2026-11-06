@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateOrderItemsTable extends Migration
 {
+    // Membuat tabel item pesanan dan relasinya ke pesanan serta produk.
     public function up()
     {
         $this->forge->addField([
@@ -44,6 +45,7 @@ class CreateOrderItemsTable extends Migration
         $this->forge->createTable('order_items');
     }
 
+    // Menghapus tabel item pesanan saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('order_items');

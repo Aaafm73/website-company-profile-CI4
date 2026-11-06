@@ -8,6 +8,7 @@ use CodeIgniter\Filters\FilterInterface;
 
 class AdminAuth implements FilterInterface
 {
+    // Mengarahkan pengunjung tanpa sesi admin ke halaman login.
     public function before(RequestInterface $request, $arguments = null)
     {
         if (!session()->get('admin_user')) {

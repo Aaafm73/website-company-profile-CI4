@@ -3,7 +3,7 @@
 <!-- Main Content -->
 <main>
     <!-- Hero Section -->
-    <section class="hero">
+    <section id="home" class="hero">
         <div class="container">
             <h1><?= $company_tagline ?? 'Hidup Sehat Dimulai dari Pilihan Makanan yang Tepat' ?></h1>
             <p><?= $company_description ?? '' ?></p>
@@ -14,9 +14,17 @@
     </section>
 
     <!-- 4C Marketing Framework Section -->
-    <section class="container">
-        <h2 class="section-title">Mengapa Memilih <span class="highlight"><?= $company_name ?? 'Kami' ?></span></h2>
-        
+    <section id="about" class="container">
+        <h2 class="section-title">Tentang <span class="highlight"><?= $company_name ?? 'Kami' ?></span></h2>
+
+        <div class="row justify-content-center pb-5" >
+            <img class="col-lg-6 about-img" src="<?=base_url('assets/vendor/img/about.jpeg')?>" alt="about">
+            <div class="col-lg-6 about-text">
+                <p >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus magnam, porro doloremque molestiae nobis aliquid hic? Illum, eligendi? Pariatur debitis minima numquam sit doloribus modi mollitia tenetur consectetur est ullam.</p>
+                <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat suscipit ducimus reiciendis amet mollitia maiores accusantium temporibus magni illum, sequi libero assumenda voluptate velit quaerat pariatur dolorem ex similique ipsum.</p>
+                <p >Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime quia exercitationem velit perspiciatis sit possimus ullam et obcaecati earum quisquam, fugit quam minima quos iusto beatae explicabo dolorem. Fugit, earum.</p>
+            </div>
+        </div>
         <div class="row">
             <!-- Context -->
             <div class="col-md-6 mb-4">
@@ -73,7 +81,7 @@
     </section>
 
     <!-- Featured Products -->
-    <section class="section-muted">
+    <section id="product" class="section-muted">
         <div class="container">
             <h2 class="section-title">Produk <span class="highlight">Pilihan</span></h2>
             
@@ -123,6 +131,93 @@
                 <a href="/products" class="btn btn-primary btn-lg">
                     <i class="fas fa-store"></i> Lihat Semua Produk
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="container my-5">
+        <h2 class="section-title">Kontak <span class="highlight"><?= $company_name ?? 'Kami' ?></span></h2>
+        <div class="row contact-row">
+            <!-- Contact Info -->
+            <div class="col-lg-4 mb-4">
+                <div class="contact-column">
+                    <div class="card mb-4 contact-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-phone fa-3x icon-primary"></i>
+                            <h5 class="card-title">Telepon</h5>
+                                <p class="card-text"><?= isset($company_phone) && $company_phone ? esc($company_phone) : '+62 XXX XXXX' ?></p>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4 contact-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-envelope fa-3x icon-primary"></i>
+                            <h5 class="card-title">Email</h5>
+                                <p class="card-text"><?= isset($company_email) && $company_email ? esc($company_email) : 'info@example.com' ?></p>
+                        </div>
+                    </div>
+
+                    <div class="card contact-card">
+                        <div class="card-body text-center">
+                            <i class="fas fa-map-marker-alt fa-3x icon-primary"></i>
+                            <h5 class="card-title">Alamat</h5>
+                                <p class="card-text"><?php if (isset($company_address) && $company_address): ?>
+                                    <?= nl2br(esc($company_address)) ?>
+                                <?php else: ?>
+                                    Alamat belum diset. Periksa pengaturan.
+                                <?php endif; ?></p>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7579.182025528702!2d111.4827035!3d-2.2075051!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e0619fec490dc8b%3A0x9849289a9d35a5d4!2sPoliteknik%20Lamandau!5e1!3m2!1sen!2sid!4v1792472814872!5m2!1sen!2sid" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="card card-elevated">
+                    <div class="card-header card-header-primary">
+                        <h5 class="mb-0"><i class="fas fa-pen-fancy"></i> Kirim Pesan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/dashboard/send-contact" method="POST">
+                            <?= csrf_field() ?>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nama Lengkap *</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Nomor Telepon (Opsional)</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subjek *</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Pesan *</label>
+                                <textarea class="form-control" id="message" name="message" rows="6" required placeholder="Tuliskan pesan Anda di sini..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-add-cart btn-lg">
+                                <i class="fas fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-4" role="alert">
+                    <i class="fas fa-info-circle"></i> <strong>Catatan:</strong> Kami akan merespon pesan Anda dalam waktu maksimal 24 jam pada hari kerja.
+                </div>
             </div>
         </div>
     </section>

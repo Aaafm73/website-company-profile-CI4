@@ -14,6 +14,7 @@ final class ExampleDatabaseTest extends CIUnitTestCase
 
     protected $seed = ExampleSeeder::class;
 
+    // Memastikan model dapat membaca seluruh baris yang dibuat seeder.
     public function testModelFindAll(): void
     {
         $model = new ExampleModel();
@@ -25,6 +26,7 @@ final class ExampleDatabaseTest extends CIUnitTestCase
         $this->assertCount(3, $objects);
     }
 
+    // Memastikan soft delete menyembunyikan baris tanpa menghapusnya secara fisik.
     public function testSoftDeleteLeavesRow(): void
     {
         $model = new ExampleModel();

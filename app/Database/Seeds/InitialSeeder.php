@@ -6,6 +6,7 @@ use CodeIgniter\Database\Seeder;
 
 class InitialSeeder extends Seeder
 {
+    // Mengisi kategori, produk awal, akun admin, dan pengaturan perusahaan.
     public function run()
     {
         $adminPassword = (string) getenv('ADMIN_INITIAL_PASSWORD');

@@ -11,12 +11,14 @@ class Products extends BaseAdminController
     protected $productModel;
     protected $categoryModel;
 
+    // Menyiapkan model produk dan kategori untuk halaman admin.
     public function __construct()
     {
         $this->productModel = new ProductModel();
         $this->categoryModel = new CategoryModel();
     }
 
+    // Menampilkan daftar produk dengan filter kategori dan pagination.
     public function index()
     {
         $categoryId = $this->request->getGet('category');
@@ -37,6 +39,7 @@ class Products extends BaseAdminController
         return view('admin/products/index', $data);
     }
 
+    // Menampilkan formulir untuk menambahkan produk.
     public function create()
     {
         $categories = $this->categoryModel->getOrderedCategories();
@@ -49,6 +52,7 @@ class Products extends BaseAdminController
         return view('admin/products/form', $data);
     }
 
+    // Memvalidasi lalu menyimpan produk baru dan gambar opsional.
     public function store()
     {
         $rules = [
@@ -84,6 +88,7 @@ class Products extends BaseAdminController
         return redirect()->to('/admin/products')->with('message', 'Produk berhasil ditambahkan');
     }
 
+    // Menampilkan formulir edit beserta data produk yang dipilih.
     public function edit($id)
     {
         $product = $this->productModel->getProductWithCategory((int) $id);
@@ -103,6 +108,7 @@ class Products extends BaseAdminController
         return view('admin/products/form', $data);
     }
 
+    // Memvalidasi lalu menyimpan perubahan produk dan gambar opsional.
     public function update($id)
     {
         $product = $this->productModel->find($id);
@@ -144,6 +150,7 @@ class Products extends BaseAdminController
         return redirect()->to('/admin/products')->with('message', 'Produk berhasil diperbarui');
     }
 
+    // Menghapus produk berdasarkan ID.
     public function delete($id)
     {
         $product = $this->productModel->find($id);

@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateAdminUsersTable extends Migration
 {
+    // Membuat tabel akun admin, kredensial, dan status aktivasi.
     public function up()
     {
         $this->forge->addField([
@@ -59,6 +60,7 @@ class CreateAdminUsersTable extends Migration
         $this->forge->createTable('admin_users');
     }
 
+    // Menghapus tabel akun admin saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('admin_users');

@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateContactsTable extends Migration
 {
+    // Membuat tabel pesan kontak dan status tindak lanjutnya.
     public function up()
     {
         $this->forge->addField([
@@ -53,6 +54,7 @@ class CreateContactsTable extends Migration
         $this->forge->createTable('contacts');
     }
 
+    // Menghapus tabel kontak saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('contacts');

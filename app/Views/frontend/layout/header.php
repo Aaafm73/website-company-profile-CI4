@@ -20,6 +20,7 @@
             if (!document.querySelector('.hero')) return;
 
             const header = document.querySelector('header');
+            // Menyesuaikan tampilan header berdasarkan posisi scroll halaman.
             const updateHeader = function () {
                 header.classList.toggle('is-scrolled', window.scrollY > 20);
             };
@@ -33,7 +34,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="<?= site_url('/') ?>">
-                    <i class="fas fa-leaf"></i> <?= $company_name ?? 'Vegetarian Paradise' ?>
+                    <img style="width:7%; height:7%;" src="<?=base_url('favicon.ico') ?>" alt="icon"> <?= $company_name ?? 'Vegetarian Paradise' ?>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
@@ -41,19 +42,16 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('/') ?>">Beranda</a>
+                            <a class="nav-link" href="#home">Beranda</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('about') ?>">Tentang Kami</a>
+                            <a class="nav-link" href="#about">Tentang Kami</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('products') ?>">Katalog Produk</a>
+                            <a class="nav-link" href="#product">Produk</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('dashboard') ?>">Dashboard Pelanggan</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?= site_url('dashboard/contact') ?>">Hubungi Kami</a>
+                            <a class="nav-link" href="#contact">Kontak</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= site_url('checkout') ?>">

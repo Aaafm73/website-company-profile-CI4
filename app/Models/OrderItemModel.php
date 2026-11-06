@@ -13,6 +13,7 @@ class OrderItemModel extends Model
     protected $useSoftDeletes = false;
     protected $allowedFields = ['order_id', 'product_id', 'quantity', 'price', 'subtotal'];
 
+    // Mengambil item pesanan beserta nama dan gambar produknya.
     public function getItemsWithProductDetails($orderId)
     {
         return $this->select('order_items.*, products.name AS product_name, products.image')

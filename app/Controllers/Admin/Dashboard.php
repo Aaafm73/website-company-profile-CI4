@@ -13,6 +13,7 @@ class Dashboard extends BaseAdminController
     protected $contactModel;
     protected $productModel;
 
+    // Menyiapkan model untuk menghitung ringkasan aktivitas toko.
     public function __construct()
     {
         $this->orderModel = new OrderModel();
@@ -20,6 +21,7 @@ class Dashboard extends BaseAdminController
         $this->productModel = new ProductModel();
     }
 
+    // Menampilkan ringkasan pesanan, pesan baru, dan produk.
     public function index()
     {
         $totalOrders = $this->orderModel->countAllResults();

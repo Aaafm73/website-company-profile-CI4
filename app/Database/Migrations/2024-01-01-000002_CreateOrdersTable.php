@@ -6,6 +6,7 @@ use CodeIgniter\Database\Migration;
 
 class CreateOrdersTable extends Migration
 {
+    // Membuat tabel pesanan dengan identitas pelanggan dan status pesanan.
     public function up()
     {
         $this->forge->addField([
@@ -65,6 +66,7 @@ class CreateOrdersTable extends Migration
         $this->forge->createTable('orders');
     }
 
+    // Menghapus tabel pesanan saat migration dibatalkan.
     public function down()
     {
         $this->forge->dropTable('orders');

@@ -28,6 +28,8 @@ $routes->post('/checkout/add-to-cart', 'Checkout::addToCart', ['filter' => 'thro
 $routes->post('/checkout/remove-from-cart', 'Checkout::removeFromCart', ['filter' => 'throttle:cart']);
 $routes->post('/checkout/update-cart', 'Checkout::updateCart', ['filter' => 'throttle:cart']);
 $routes->post('/checkout/process', 'Checkout::process', ['filter' => 'throttle:checkout']);
+$routes->post('/checkout/confirm-payment', 'Checkout::confirmPayment', ['filter' => 'throttle:checkout']);
+$routes->get('/checkout/success', 'Checkout::success');
 
 // Dashboard Routes
 $routes->get('/dashboard', 'Dashboard::index');

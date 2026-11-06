@@ -9,11 +9,13 @@ class Settings extends BaseAdminController
 {
     protected $settingModel;
 
+    // Menyiapkan model pengaturan perusahaan.
     public function __construct()
     {
         $this->settingModel = new SettingModel();
     }
 
+    // Menampilkan seluruh pengaturan perusahaan yang tersimpan.
     public function index()
     {
         $settings = $this->settingModel->getAllSettings();
@@ -26,6 +28,7 @@ class Settings extends BaseAdminController
         return view('admin/settings/index', $data);
     }
 
+    // Menyimpan perubahan untuk pengaturan perusahaan yang diizinkan.
     public function update()
     {
         $settingKeys = [
