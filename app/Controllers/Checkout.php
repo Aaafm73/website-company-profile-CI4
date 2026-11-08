@@ -26,7 +26,7 @@ class Checkout extends BaseController
         $this->settingModel = new SettingModel();
 
         // Pindahkan Konfigurasi Global Midtrans ke Constructor agar selalu aktif
-        Config::$serverKey    = 'SB-Mid-server-rFz70H.dXtPeJMAcLuvR-OOL'; // Ganti dengan SERVER KEY Sandbox Anda asli
+        Config::$serverKey    = $_ENV['MIDTRANS_SERVER_KEY']; // Ganti dengan SERVER KEY Sandbox Anda asli
         Config::$isProduction = false;
         Config::$isSanitized  = true;
         Config::$is3ds        = true;

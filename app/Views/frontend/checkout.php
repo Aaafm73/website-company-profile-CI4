@@ -151,7 +151,7 @@
 
 <script type="text/javascript"
         src="https://app.sandbox.midtrans.com/snap/snap.js"
-        data-client-key="SB-Mid-client-ygj8z-MEbfC3qftL1EFbAhrS"></script>
+        const data-client-key="<?php echo $_ENV['MIDTRANS_CLIENT_KEY']; ?>"></script> //Ini diganti dengan CLIENT KEY Sandbox Anda asli
 <script>
     // --- SCRIPT ATAS (Fungsi Pengatur Keranjang Belanja Anda) ---
     // Mengurangi jumlah item dan menyimpan perubahan ke keranjang server.
