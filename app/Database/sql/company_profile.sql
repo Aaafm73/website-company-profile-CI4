@@ -40,13 +40,6 @@ CREATE TABLE `admin_users` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `admin_users`
---
-
-INSERT INTO `admin_users` (`id`, `username`, `email`, `password`, `full_name`, `role`, `is_active`, `last_login`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@vegetarian.com', '$2y$10$VcgMjP4EHWo5jvt8NaY7be78wNqs/aKBYEE80nPuUOJyty4bk97Rq', 'Administrator', 'admin', 1, '2026-09-30 14:47:00', '2026-05-17 08:59:53', '2026-09-30 14:47:00');
-
 -- --------------------------------------------------------
 
 --
@@ -57,18 +50,6 @@ CREATE TABLE `categories` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `categories`
---
-
-INSERT INTO `categories` (`id`, `name`) VALUES
-(3, 'Dessert'),
-(6, 'Lainnya'),
-(5, 'Makanan Jadi'),
-(2, 'Minuman'),
-(1, 'Protein'),
-(4, 'Sayuran');
 
 -- --------------------------------------------------------
 
@@ -87,15 +68,6 @@ CREATE TABLE `contacts` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `contacts`
---
-
-INSERT INTO `contacts` (`id`, `name`, `email`, `phone`, `subject`, `message`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'pengajuan kerja sama', 'lorem ipsum doloor sit ametw', 'read', '2026-05-17 23:54:34', '2026-05-17 23:55:06'),
-(2, 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'pengajuan kerja sama', 'lorem ipsum dolor sit amet nyan varuq golar patikaj burij', 'replied', '2026-05-19 14:16:18', '2026-05-19 14:17:31'),
-(3, 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'pengajuan kerja sama', 'saya tertarik untuk menjalin kerja sama dengan vegetarian paradise.', 'read', '2026-05-26 04:34:01', '2026-05-26 04:34:20');
 
 -- --------------------------------------------------------
 
@@ -147,23 +119,6 @@ CREATE TABLE `orders` (
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `order_number`, `customer_name`, `customer_email`, `customer_phone`, `customer_address`, `total_amount`, `status`, `payment_method`, `notes`, `created_at`, `updated_at`) VALUES
-(2, 'ORD-20260519-0001', 'Jojo', 'jojo@speedwagon.com', '082262121210', 'rumahku', 75000.00, 'delivered', 'cod', 'mau lawan zombie', '2026-05-19 03:41:19', '2026-05-19 03:43:20'),
-(3, 'ORD-20260519-0002', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 45000.00, 'delivered', 'transfer', '', '2026-05-19 14:46:00', '2026-05-19 14:46:47'),
-(4, 'ORD-20260526-0003', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 24000.00, 'delivered', 'cod', 'saya mau cepat nyobain', '2026-05-26 04:31:03', '2026-05-30 04:41:18'),
-(5, 'ORD-20260526-0004', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 10000.00, 'shipped', 'cod', 'semoga hewannya sejahtera', '2026-05-26 04:38:54', '2026-05-26 04:39:58'),
-(6, 'ORD-20260530-0005', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 12000.00, 'delivered', 'cod', '', '2026-05-30 02:50:17', '2026-05-30 02:57:32'),
-(7, 'ORD-20260530-0006', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 12000.00, 'delivered', 'transfer', '', '2026-05-30 03:03:07', '2026-05-30 04:40:27'),
-(8, 'ORD-20260530-0007', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 10000.00, 'delivered', 'transfer', 'hallo', '2026-05-30 04:42:24', '2026-05-30 04:47:03'),
-(9, 'ORD-20260530-0008', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 90000.00, 'delivered', 'transfer', '', '2026-05-30 04:47:53', '2026-05-30 04:48:19'),
-(10, 'ORD-20260602-0009', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 75000.00, 'delivered', 'cod', '', '2026-06-02 04:15:28', '2026-09-28 09:47:50'),
-(11, 'ORD-20260928-0010', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 30000.00, 'delivered', 'cod', 'pesan yang segar', '2026-09-28 09:43:55', '2026-09-28 09:45:45'),
-(12, 'ORD-20260928-0011', 'Afif Firman', 'afif.firman19@gmail.com', '082262121210', 'Lamandau', 33000.00, 'delivered', 'cod', '', '2026-09-28 10:42:13', '2026-09-28 10:43:01');
-
 -- --------------------------------------------------------
 
 --
@@ -178,24 +133,6 @@ CREATE TABLE `order_items` (
   `price` decimal(10,2) NOT NULL,
   `subtotal` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`, `subtotal`) VALUES
-(2, 2, 11, 1, 75000.00, 75000.00),
-(3, 3, 9, 1, 45000.00, 45000.00),
-(4, 4, 2, 2, 12000.00, 24000.00),
-(5, 5, 12, 2, 5000.00, 10000.00),
-(6, 6, 2, 1, 12000.00, 12000.00),
-(7, 7, 2, 1, 12000.00, 12000.00),
-(8, 8, 12, 2, 5000.00, 10000.00),
-(9, 9, 9, 2, 45000.00, 90000.00),
-(10, 10, 11, 1, 75000.00, 75000.00),
-(11, 11, 1, 2, 15000.00, 30000.00),
-(12, 12, 5, 1, 18000.00, 18000.00),
-(13, 12, 1, 1, 15000.00, 15000.00);
 
 -- --------------------------------------------------------
 
@@ -215,21 +152,6 @@ CREATE TABLE `products` (
   `category_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `image`, `stock`, `created_at`, `updated_at`, `category_id`) VALUES
-(1, 'Tahu Organik Segar', 'Tahu organik berkualitas premium yang dibuat dari kacang kedelai pilihan.', 15000.00, 'uploads/products/1779017447_df5af4d352c6b77ecc84.jpg', 48, '2026-05-17 08:59:53', '2026-05-17 23:47:15', 1),
-(2, 'Tempe Goreng', 'Tempe goreng renyah dengan cita rasa tradisional yang nikmat.', 12000.00, 'uploads/products/1779017432_cdc3166fb746f7ae30c1.jpg', 56, '2026-05-17 08:59:53', '2026-05-30 03:03:07', 1),
-(5, 'Jus Buah Segar', 'Jus buah segar tanpa pengawet, dibuat fresh setiap hari.', 18000.00, 'uploads/products/1779074894_ed8fd7db9f112c2255b6.jpg', 70, '2026-05-17 08:59:53', '2026-05-18 03:28:14', 2),
-(6, 'Salad Buah Premium', 'Salad buah premium dengan dressing madu yang sehat dan lezat.', 35000.00, 'uploads/products/1779074911_a904d81fa2def47d1d7f.jpg', 25, '2026-05-17 08:59:53', '2026-05-19 03:33:26', 3),
-(7, 'Selada Segar Organik', 'Selada segar yang dibudidayakan tanpa pupuk kimia dan pestisida. Sepenuhnya menggunakan pupuk organik.', 20000.00, 'uploads/products/1779075076_0ea595df5c81e21ff40f.jpg', 30, '2026-05-18 03:31:16', '2026-05-18 03:33:04', 4),
-(8, 'Kripik Buah dan Sayur MIX', 'dari buah dan sayur segar yang dikeringkan dan diolah menjadi kripik yang sehat dan lezat.', 40000.00, 'uploads/products/1779075174_acfd7e7766902496b93a.jpg', 50, '2026-05-18 03:32:54', '2026-05-18 03:32:54', 5),
-(9, 'Brokoli Organik', 'Brokoli segar yang dibudidayakan tanpa bahan kimia dan sepenuhnya organik.', 45000.00, 'uploads/products/1779075278_2468dd1b204a73f89b94.jpg', 24, '2026-05-18 03:34:38', '2026-05-30 04:48:19', 4),
-(11, 'Jamur', 'Bisa melawan Zombie', 75000.00, 'uploads/products/1779161532_e95e63b5d8670331083c.jpg', 7, '2026-05-19 03:32:12', '2026-06-02 04:16:54', 6),
-(12, 'Telur Asin', 'ini telur asin berkualitas, dari hewan ternak bahagia.', 5000.00, 'uploads/products/1779770256_1ce22907c8d869b3e7d8.jpg', 16, '2026-05-26 04:37:36', '2026-05-30 04:42:24', 5);
-
 -- --------------------------------------------------------
 
 --
@@ -243,18 +165,6 @@ CREATE TABLE `settings` (
   `description` text DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `settings`
---
-
-INSERT INTO `settings` (`id`, `key`, `value`, `description`, `updated_at`) VALUES
-(1, 'company_name', 'Vegetarian Paradise', 'Nama perusahaan', '2026-09-30 01:45:38'),
-(2, 'company_tagline', 'Hidup Sehat Dimulai dari Pilihan Makanan yang Tepat', 'Tagline perusahaan', '2026-09-30 01:45:38'),
-(3, 'company_description', 'Kami adalah perusahaan yang berkomitmen menyediakan produk vegetarian berkualitas tinggi untuk mendukung gaya hidup sehat Anda.', 'Deskripsi perusahaan', '2026-09-30 01:45:38'),
-(4, 'company_phone', '+62 822 6212 1210', 'Nomor telepon perusahaan', '2026-09-30 01:45:38'),
-(5, 'company_email', 'info@vegetarian.com', 'Email perusahaan', '2026-09-30 01:45:38'),
-(6, 'company_address', 'Jl. Ahmad Yani, Sematu Jaya, Lamandau, Kalimantan Tengah', 'Alamat perusahaan', '2026-09-30 01:45:38');
 
 --
 -- Indexes for dumped tables
@@ -323,19 +233,19 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `admin_users`
 --
 ALTER TABLE `admin_users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -347,25 +257,25 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables
