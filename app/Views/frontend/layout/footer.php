@@ -18,7 +18,7 @@
                 <div class="col-md-3 mb-4">
                     <h5>Informasi</h5>
                     <ul class="footer-list">
-                        <li><i class="fas fa-phone"></i> <?= $company_phone ?? '+62 822 6212 1210' ?></li>
+                        <li><i class="fas fa-phone"></i> <?= $company_phone ?? '+62 822 xxxx xxxx' ?></li>
                         <li><i class="fas fa-envelope"></i> <?= $company_email ?? 'vegetarianparadise@gmail.com' ?></li>
                         <li><i class="fas fa-map-marker-alt"></i> <?= substr($company_address ?? 'Alamat', 0, 30) ?>...</li>
                     </ul>
